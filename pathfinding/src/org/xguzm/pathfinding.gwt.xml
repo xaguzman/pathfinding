@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<module rename-to="org.xguzm.pathfinding">
+	<source path="pathfinding" />
+</module>
