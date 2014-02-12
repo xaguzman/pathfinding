@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;
-import org.xguzm.pathfinding.grid.finders.AStarFinder;
+import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
+import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 
-public class Main {
+
+public class ConsoleTest {
 
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException{
 	
@@ -26,12 +28,13 @@ public class Main {
 		System.out.println("");
 		
 		NavigationGrid<GridCell> grid= new NavigationGrid<GridCell>(4, 3, GridCell.class, cells );
-		AStarFinder<GridCell> finder = new AStarFinder<>(GridCell.class);
+		AStarGridFinder<GridCell> finder = new AStarGridFinder<GridCell>(GridCell.class, new GridFinderOptions());
 		
 		List<GridCell> path = finder.findPath(1, 0, 3, 2,  grid);
 		for(GridCell c : path){
 			System.out.println(c);
 		}
+		System.out.println("");
 		
 		GridCell[][] nodes = {
 				{new GridCell(0, 0, false), new GridCell(0, 1, false), new GridCell(0, 2, false)},

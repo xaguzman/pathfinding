@@ -1,12 +1,11 @@
-package org.xguzm.pathfinding.grid;
+package org.xguzm.pathfinding;
 
 import java.lang.reflect.Array;
 import java.util.Comparator;
 
-import org.xguzm.pathfinding.Indexable;
+import org.xguzm.pathfinding.BHeapNode;
 
-
-public class BHeap<T extends Indexable<?>> {
+public class BHeap<T extends BHeapNode<?>> {
 	
 	public int size = 0;
 

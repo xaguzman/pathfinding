@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="org/xguzm/pathfinding/grid/finders/AStarFinder.java|org/xguzm/pathfinding/grid/finders/GridFinder.java|org/xguzm/pathfinding/grid/Util.java|org/xguzm/pathfinding/grid/BHeap.java|org/xguzm/pathfinding/grid/Heuristic.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

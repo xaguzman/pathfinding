@@ -4,13 +4,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.xguzm.pathfinding.NavigationGraph;
+import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 
-public class NavigationGrid<T extends GridCell> {
+public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	protected int width;
 	protected int height;
 	private List<T> neighbors = new ArrayList<T>();
-	private GridFinderOptions defaultOptions = new GridFinderOptions();
+	//private GridFinderOptions defaultOptions = new GridFinderOptions();
 	
 	/** The nodes contained in the grid. They are stored as Grid[x][y] */
 	protected T[][] nodes;
@@ -117,14 +119,11 @@ public class NavigationGrid<T extends GridCell> {
 	    this.nodes[x][y].setWalkable(walkable);
 	};
 	
-	/**
-	 * Calls {@link #getNeighbors(GridCell, GridFinderOptions)} with the default
-	 * {@link GridFinderOptions}
-	 */
-	public List<T> getNeighbors(GridCell node){
-		return getNeighbors(node, defaultOptions);
-	}
 
+	@Override
+	public List<T> getNeighbors(T cell) {
+		return null;
+	}
 
 	/**
 	 * Get the neighbors of the given node.
@@ -143,7 +142,9 @@ public class NavigationGrid<T extends GridCell> {
 	 * @param node
 	 * @param options
 	 */
-	public List<T> getNeighbors(GridCell node, GridFinderOptions options) {
+	@Override
+	public List<T> getNeighbors(T node, PathFinderOptions opt) {
+		GridFinderOptions options = (GridFinderOptions) opt;
 		boolean allowDiagonal = options.allowDiagonal;
 		boolean dontCrossCorners = options.dontCrossCorners;
 		int yDir = options.isYDown ?  -1 : 1;
@@ -207,5 +208,19 @@ public class NavigationGrid<T extends GridCell> {
 	    }
 
 	    return neighbors;
+	}
+
+	@Override
+	public float getMovementCost(T node1, T node2, PathFinderOptions opt) {
+		GridFinderOptions options = (GridFinderOptions)opt;
+		GridCell cell1 = (GridCell) node1, cell2 = (GridCell) node2;
+		return cell1.x == cell2.x || cell1.y == cell2.y  ? 
+				options.orthogonalMovementCost : options.diagonalMovementCost;
+	}
+
+	@Override
+	public boolean isWalkable(T node) {
+		GridCell c = (GridCell)node;
+		return isWalkable(c.x, c.y);
 	};
 }

@@ -1,12 +1,14 @@
 package org.xguzm.pathfinding.grid.finders;
 
-import org.xguzm.pathfinding.grid.Heuristic;
+import org.xguzm.pathfinding.Heuristic;
+import org.xguzm.pathfinding.PathFinderOptions;
+import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
 
 /**
  * The options for the pathfinding behavior.
  * @author Xavier
  */
-public class GridFinderOptions {
+public class GridFinderOptions extends PathFinderOptions {
 
 	/** Wether diagonal movement is allowed within the grid
 	 * </p>
@@ -46,12 +48,7 @@ public class GridFinderOptions {
 	 */
 	public boolean dontCrossCorners;
 	
-	/** The {@link Heuristic} to calculate the distance from one node to another 
-	 * </p>
-	 * Default value is {@link Heuristic#Manhattan}
-	 */
-	public Heuristic heuristic;
-	
+
 	/** When false, (0,0) is located at the bottom left of the grid. When true, (0,0) is located
 	 * at the top left of the grid
 	 *
@@ -60,29 +57,33 @@ public class GridFinderOptions {
 	 */
 	public boolean isYDown ;
 	
+	/** The cost of moving one cell over the x or y axis */
+	public float orthogonalMovementCost;
+	
+	/** The cost of moving one cell over the x and y axis */
+	public float diagonalMovementCost;
+	
 	/**
 	 * Constructs a new GridFinderOptions with the default values:
 	 * <pre>
 	 * {@link #allowDiagonal} = true  
 	 * {@link #dontCrossCorners} = true
-	 * {@link #heuristic} = {@link Heuristic#Manhattan}
+	 * {@link #heuristic} = {@link ManhattanDistance}
 	 * {@link #isYDown} = false
+	 * {@link #orthogonalMovementCost} = 1
+	 * {@link #diagonalMovementCost} = 1.4
 	 */
 	public GridFinderOptions(){
-		this(true, true, Heuristic.Manhattan, false);
+		this(true, true, new ManhattanDistance(), false, 1, 1.4f);
 	}
 	
-	/**
-	 * @param {@link #allowDiagonal}  
-	 * @param {@link #dontCrossCorners}
-	 * @param {@link #heuristic}
-	 * @param {@link #isYDown}
-	 */
-	public GridFinderOptions(boolean allowDiagonals, boolean dontCrossCorners, Heuristic heuristic, boolean isyDown){
+	public GridFinderOptions(boolean allowDiagonals, boolean dontCrossCorners, Heuristic heuristic, boolean isyDown, float orthogonalMovementCost, float diagonalMovementCost){
 		this.allowDiagonal = allowDiagonals;
 		this.dontCrossCorners = dontCrossCorners;
 		this.heuristic = heuristic;
 		this.isYDown = isyDown;
+		this.orthogonalMovementCost = orthogonalMovementCost;
+		this.diagonalMovementCost = diagonalMovementCost;
 	}
 
 }

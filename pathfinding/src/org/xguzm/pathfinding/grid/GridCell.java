@@ -1,16 +1,16 @@
 package org.xguzm.pathfinding.grid;
 
-import org.xguzm.pathfinding.Indexable;
+import org.xguzm.pathfinding.NavigationNode;
 
 
-public class GridCell implements Indexable<GridCell>{
+public class GridCell implements NavigationNode{
 	public int x;
 	public int y;
 	
 	/* for path finders*/
 	private float f, g, h;
 	private boolean isWalkable;
-	public int closedOnJob, openedOnJob;
+	private int closedOnJob, openedOnJob;
 	private GridCell parent;
 	
 	//for BTree
@@ -54,43 +54,58 @@ public class GridCell implements Indexable<GridCell>{
 		this.f = f;
 	}
 
-	public float getG() {
+	@Override
+	public float getMovementCost() {
 		return g;
 	}
 
-	public void setG(float g) {
+	@Override
+	public void setMovementCost(float g) {
 		this.g = g;
 	}
 
-	public float getH() {
+	@Override
+	public float getHeuristic() {
 		return h;
 	}
 
-	public void setH(float h) {
+	@Override
+	public void setHeuristic(float h) {
 		this.h = h;
 	}
 
-	public GridCell getParent() {
+	@Override
+	public NavigationNode getParent() {
 		return parent;
 	}
 
-	public void setParent(GridCell parent) {
-		this.parent = parent;
+	@Override
+	public void setParent(NavigationNode parent) {
+		this.parent = (GridCell)parent;
 	}
 
-//	/**
-//	 * Compares to another navigation node. Comparison is based on their getF() value.
-//	 */
-//	@Override
-//	public int compareTo(GridCell o) {
-//		if (o == null)
-//			return 1;
-//		return (int)(this.getF() - o.getF());
-//	}
-	
+	@Override
+	public int getClosedOnJob() {
+		return closedOnJob;
+	}
+
+	@Override
+	public void setClosedOnJob(int closedOnJob) {
+		this.closedOnJob = closedOnJob;
+	}
+
+	@Override
+	public int getOpenedOnJob() {
+		return openedOnJob;
+	}
+
+	@Override
+	public void setOpenedOnJob(int openedOnJob) {
+		this.openedOnJob = openedOnJob;
+	}
+
 	@Override
 	public String toString() {
 		return "[" + x + ", " + y + "]";
 	}
-
 }
