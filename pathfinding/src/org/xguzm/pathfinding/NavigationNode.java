@@ -12,21 +12,25 @@ public interface NavigationNode extends BHeapNode<NavigationNode>{
 	int getOpenedOnJob();
 	void setOpenedOnJob(int job);
 	
+	//f
 	public float getF();
 	public void setF(float f);
 
-	public float getMovementCost();
-	public void setMovementCost(float g);
+	//g
+	public float getG();
+	public void setG(float g);
 
+	
+	//h
 	/** 
 	 * Gets the computed value of the heuristic used to get from this point to the goal node. The
 	 * heuristic is determined {@link PathFinderOptions#heuristic} used to navigate the grid
 	 */
-	public float getHeuristic();
+	public float getH();
 	
 	/** 
 	 * Sets the computed value of the heuristic used to get from this point to the goal node. The
 	 * heuristic is determined {@link PathFinderOptions#heuristic} used to navigate the grid
 	 *  */
-	public void setHeuristic(float h);
+	public void setH(float h);
 }

@@ -18,11 +18,7 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	BHeap<T> openList;
 	HashSet<T> closedList;
 	public int jobId;
-	
-//	public AStarFinder(Class<T> clazz) {
-//		this (clazz, new GridFinderOptions());
-//	}
-	
+		
 	public AStarFinder(Class<T> clazz, PathFinderOptions opt) {
 	    this.defaultOptions = opt ;
 	    openList = new BHeap<T>(new Comparator<T>() {
@@ -52,7 +48,7 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
         List<T> neighbors = new ArrayList<T>();
         float ng;
         
-	    startNode.setMovementCost(0);
+	    startNode.setG(0);
 	    startNode.setF(0);
 
 	    // push the start node into the open list
@@ -84,22 +80,16 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	                continue;
 	            }
 
-	            //c = neighbor.x;
-	            //r = neighbor.y;
+	            // get the distance between current node and the neighbor and calculate the next g score
+	            ng = node.getG() + graph.getMovementCost(node, neighbor, defaultOptions);
 
-	            // get the distance between current node and the neighbor
-	            // and calculate the next g score
-	            //ng = node.getMovementCost() + ((c == node.x || r == node.y ) ? 1 : 1.4f);
-	            ng = node.getMovementCost() + graph.getMovementCost(node, neighbor, defaultOptions);
-
-	            // check if the neighbor has not been inspected yet, or
-	            // can be reached with smaller cost from the current node
-	            if (neighbor.getOpenedOnJob() != job || ng < neighbor.getMovementCost()) {
+	            // check if the neighbor has not been inspected yet, or can be reached with smaller cost from the current node
+	            if (neighbor.getOpenedOnJob() != job || ng < neighbor.getG()) {
 	            	float prevf = neighbor.getF();
-	                neighbor.setMovementCost(ng);
+	                neighbor.setG(ng);
 	                //neighbor.setHeuristic(opt.heuristic.calculate( c, r, endNode.x, endNode.y));
-	                neighbor.setHeuristic(defaultOptions.heuristic.calculate(neighbor, endNode));
-	                neighbor.setF( neighbor.getMovementCost() + neighbor.getHeuristic());
+	                neighbor.setH(defaultOptions.heuristic.calculate(neighbor, endNode));
+	                neighbor.setF( neighbor.getG() + neighbor.getH());
 	                neighbor.setParent(node);
 
 	                if (neighbor.getOpenedOnJob() != job) {

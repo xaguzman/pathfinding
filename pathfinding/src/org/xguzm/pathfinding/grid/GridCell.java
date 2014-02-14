@@ -55,22 +55,22 @@ public class GridCell implements NavigationNode{
 	}
 
 	@Override
-	public float getMovementCost() {
+	public float getG() {
 		return g;
 	}
 
 	@Override
-	public void setMovementCost(float g) {
+	public void setG(float g) {
 		this.g = g;
 	}
 
 	@Override
-	public float getHeuristic() {
+	public float getH() {
 		return h;
 	}
 
 	@Override
-	public void setHeuristic(float h) {
+	public void setH(float h) {
 		this.h = h;
 	}
 

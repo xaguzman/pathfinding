@@ -10,14 +10,20 @@ import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
  */
 public class GridFinderOptions extends PathFinderOptions {
 
-	/** Wether diagonal movement is allowed within the grid
+	/** 
+	 * Wether diagonal movement is allowed within the grid.
+	 * 
 	 * </p>
+	 * <b>Note:</b> This will be ignored in {@link JumpPointFinder}, as diagonal movement is required for it
+	 * </p>
+	 * 
 	 * Default value is true
 	 */
 	public boolean allowDiagonal;
 	
 	/** When true, diagonal movement requires both neighbors to be open.
 	 * When false, diagonal movement can be achieved by having only one open nighbor
+	 * </p>
 	 *  
 	 * Example: To go from (1,1) to (2,2) when this is set to true, where (x) denotes a non walkable cell,
 	 * the following applies
@@ -60,7 +66,7 @@ public class GridFinderOptions extends PathFinderOptions {
 	/** The cost of moving one cell over the x or y axis */
 	public float orthogonalMovementCost;
 	
-	/** The cost of moving one cell over the x and y axis */
+	/** The cost of moving one cell over both the x and y axis  */
 	public float diagonalMovementCost;
 	
 	/**
