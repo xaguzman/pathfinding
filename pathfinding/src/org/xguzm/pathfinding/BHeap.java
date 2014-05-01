@@ -5,6 +5,9 @@ import java.util.Comparator;
 
 import org.xguzm.pathfinding.BHeapNode;
 
+/*
+ * Slight modification over Nathan Sweet's implementation on libgdx.
+ */
 public class BHeap<T extends BHeapNode<?>> {
 	
 	public int size = 0;

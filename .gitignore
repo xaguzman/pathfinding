@@ -1,4 +1,4 @@
 .metadata
 *.class
-*/bin
-*/gen
+bin/
+target/

@@ -12,11 +12,17 @@ import org.xguzm.pathfinding.PathFinder;
 import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.Util;
 
+/**
+ * A generic implementation of A* that works on any {@link NavigationGraph} instance.
+ * 
+ * @author Xavier Guzman
+ *
+ * @param <T> a class implementing {@link NavigationNode}
+ */
 public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	
 	private PathFinderOptions defaultOptions;
 	BHeap<T> openList;
-	HashSet<T> closedList;
 	public int jobId;
 		
 	public AStarFinder(Class<T> clazz, PathFinderOptions opt) {
@@ -36,7 +42,6 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 		    		return (int)(o1.getF() - o2.getF());
 		    	}
 		}, clazz);
-	    closedList = new HashSet<T>();
 	}
 	
 	public List<T> findPath(T startNode, T endNode, NavigationGraph<T> graph) {
@@ -56,7 +61,6 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	    openList.add(startNode);
 	    startNode.setParent(null);
 	    startNode.setOpenedOnJob( job );
-	    //int r, c;
 	    
 	    while (openList.size > 0) {
 	    	
@@ -87,7 +91,7 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	            if (neighbor.getOpenedOnJob() != job || ng < neighbor.getG()) {
 	            	float prevf = neighbor.getF();
 	                neighbor.setG(ng);
-	                //neighbor.setHeuristic(opt.heuristic.calculate( c, r, endNode.x, endNode.y));
+
 	                neighbor.setH(defaultOptions.heuristic.calculate(neighbor, endNode));
 	                neighbor.setF( neighbor.getG() + neighbor.getH());
 	                neighbor.setParent(node);
@@ -101,8 +105,8 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	                    openList.updateNode(neighbor, node.getF() - prevf);
 	                }
 	            }
-	        } // end for each neighbor
-	    } // end while not open list empty
+	        } 
+	    } 
 
 	    // fail to find the path
 	    return null;

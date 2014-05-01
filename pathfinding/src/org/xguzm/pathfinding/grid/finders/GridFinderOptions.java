@@ -5,8 +5,9 @@ import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
 
 /**
- * The options for the pathfinding behavior.
- * @author Xavier
+ * The options for the pathfinding behavior on a {@link NavigationGrid}.
+ * 
+ * @author Xavier Guzman
  */
 public class GridFinderOptions extends PathFinderOptions {
 
@@ -31,18 +32,18 @@ public class GridFinderOptions extends PathFinderOptions {
 	 * <pre>
 	 *                 Valid           Invalid
 	 *             +---+---+---+    +---+---+---+
-	 *             |   |   |   |    |   | x |   |
+	 *             |   |   | 0 |    |   | x | 0 |
 	 *             +---+---+---+    +---+---+---+
-	 * when True   |   |   |   |    |   |   |   |
+	 * when True   |   | 0 |   |    |   | 0 |   |
 	 *             +---+---+---+    +---+---+---+
 	 *             |   |   |   |    |   |   |   |
 	 *             +---+---+---+    +---+---+---+
 	 *  
 	 *             
 	 *             +---+---+---+    
-	 *             |   | x |   |    
+	 *             |   | x | 0 |    
 	 *             +---+---+---+    
-	 * when false  |   |   |   |    none
+	 * when false  |   | 0 |   |    none
 	 *             +---+---+---+    
 	 *             |   |   |   |    
 	 *             +---+---+---+    

@@ -8,6 +8,14 @@ import org.xguzm.pathfinding.NavigationGraph;
 import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 
+/**
+ * A {@link NavigationGrid} which is represented as a grid or a table.
+ * The nodes are accessible through (x, y) coordinates. 
+ * 
+ * @author Xavier Guzman
+ *
+ * @param <T> only classes extending {@link GridCell} can be used within this graph
+ */
 public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	protected int width;
 	protected int height;
@@ -16,8 +24,6 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	
 	/** The nodes contained in the grid. They are stored as Grid[x][y] */
 	protected T[][] nodes;
-
-	//public NavigationGrid(Class<T> clazz){}
 	
 	public NavigationGrid(int width, int height, Class<T> clazz) throws InstantiationException, IllegalAccessException {
 		this(width, height, clazz, null);

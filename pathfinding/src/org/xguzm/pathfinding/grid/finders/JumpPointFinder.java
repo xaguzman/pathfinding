@@ -15,11 +15,11 @@ import org.xguzm.pathfinding.grid.heuristics.EuclideanDistance;
 
 /**
  * Optimization over A*. This will always use @{link {@link EuclideanDistance}, regardless
- * of the one set in the passed {@link #options} 
+ * of the one set in the passed {@link #options}. This should only be used on {@link NavigationGrid}
  * 
  * @author Xavier Guzman
  *
- * @param <T>
+ * @param <T> any class extending from {@link GridCell}
  */
 public class JumpPointFinder<T extends GridCell> implements PathFinder<T>{	
 	BHeap<T> openList;

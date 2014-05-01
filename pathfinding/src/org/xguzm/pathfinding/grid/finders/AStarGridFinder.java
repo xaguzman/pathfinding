@@ -6,6 +6,13 @@ import org.xguzm.pathfinding.finders.AStarFinder;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;
 
+/**
+ * A helper class to which lets you find a path based on coordinates rather than nodes on {@link NavigationGrid}'s.
+ * 
+ * @author Xavier Guzman
+ *
+ * @param <T> any class that inherits from {@link GridCell}
+ */
 public class AStarGridFinder<T extends GridCell> extends AStarFinder<T> {
 
 	public AStarGridFinder(Class<T> clazz) {
