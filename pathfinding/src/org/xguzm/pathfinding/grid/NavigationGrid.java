@@ -1,6 +1,5 @@
 package org.xguzm.pathfinding.grid;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,63 +24,69 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	/** The nodes contained in the grid. They are stored as Grid[x][y] */
 	protected T[][] nodes;
 	
-	public NavigationGrid(int width, int height, Class<T> clazz) throws InstantiationException, IllegalAccessException {
-		this(width, height, clazz, null);
-	}
+//	public NavigationGrid(int width, int height, Class<T> clazz) throws InstantiationException, IllegalAccessException {
+//		this(width, height, clazz, null);
+//	}
 	
-	/**
-	 * The Grid class, which serves as the encapsulation of the layout of the nodes.
-	 * @param width Number of columns of the grid.
-	 * @param height Number of rows of the grid.
-	 * @param matrix - A matrix( columns, rows) representing  the walkable status of the nodes(0 for walkable, everything else
-	 * for unwalkable).
-	 *     If the matrix is not supplied, all the nodes will be walkable.  
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException */
-	public NavigationGrid(int width, int height, Class<T> clazz, int[][] matrix ) throws InstantiationException, IllegalAccessException {
-	    this.width = width;
-	    this.height = height;
-	    this.nodes = buildNodes(width, height, clazz, matrix);
-	}
+//	/**
+//	 * The Grid class, which serves as the encapsulation of the layout of the nodes.
+//	 * @param width Number of columns of the grid.
+//	 * @param height Number of rows of the grid.
+//	 * @param matrix - A matrix( columns, rows) representing  the walkable status of the nodes(0 for walkable, everything else
+//	 * for unwalkable).
+//	 *     If the matrix is not supplied, all the nodes will be walkable.  
+//	 * @throws IllegalAccessException 
+//	 * @throws InstantiationException */
+//	public NavigationGrid(int width, int height, Class<T> clazz, int[][] matrix ) throws InstantiationException, IllegalAccessException {
+//	    this.width = width;
+//	    this.height = height;
+//	    this.nodes = buildNodes(width, height, clazz, matrix);
+//	}
 
-	public NavigationGrid(int width, int height, T[][] nodes){
-		this.width = width;
-		this.height = height;
+//	public NavigationGrid(int width, int height, T[][] nodes){
+//		this.width = width;
+//		this.height = height;
+//		this.nodes = nodes;
+//	}
+	
+	public NavigationGrid(T[][] nodes){
+		this.width = nodes.length;
+		this.height = nodes[0].length;
 		this.nodes = nodes;
 	}
 
-	/**
-	 * Build and return the nodes.
-	 * @param columns the width (in cells) of this grid
-	 * @param rows the height (in cells) of this grid
-	 * @param matrix - A matrix representing the walkable status of the nodes. 0 is walkable, any other
-	 * value will be unwalkable
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
-	@SuppressWarnings("unchecked")
-	private T[][] buildNodes(int columns, int rows, Class<T> clazz, int[][] matrix) throws InstantiationException, IllegalAccessException {
-		if (matrix == null) {
-	        return nodes;
-	    }
-		
-		if (matrix.length != columns || matrix[0].length != rows) {
-	        throw new IllegalArgumentException("Matrix size does not fit");
-	    }
-		
-		T[][]nodes = (T[][])Array.newInstance(clazz, columns, rows);
-		
-		int i, j;
-	    for (i = 0; i < columns; ++i) {
-	        for (j = 0; j < rows; ++j) {
-	            nodes[i][j] = clazz.newInstance();
-	            nodes[i][j].x = i;
-	            nodes[i][j].y = j;
-	            nodes[i][j].setWalkable(matrix[i][j] == 0);
-	        }
-	    }
-	    return nodes;
-	};
+//	/**
+//	 * Build and return the nodes.
+//	 * @param columns the width (in cells) of this grid
+//	 * @param rows the height (in cells) of this grid
+//	 * @param matrix - A matrix representing the walkable status of the nodes. 0 is walkable, any other
+//	 * value will be unwalkable
+//	 * @throws IllegalAccessException 
+//	 * @throws InstantiationException 
+//	 */
+//	@SuppressWarnings("unchecked")
+//	private T[][] buildNodes(int columns, int rows, Class<T> clazz, int[][] matrix) throws InstantiationException, IllegalAccessException {
+//		if (matrix == null) {
+//	        return nodes;
+//	    }
+//		
+//		if (matrix.length != columns || matrix[0].length != rows) {
+//	        throw new IllegalArgumentException("Matrix size does not fit");
+//	    }
+//		
+//		T[][]nodes = (T[][])Array.newInstance(clazz, columns, rows);
+//		
+//		int i, j;
+//	    for (i = 0; i < columns; ++i) {
+//	        for (j = 0; j < rows; ++j) {
+//	            nodes[i][j] = clazz.newInstance();
+//	            nodes[i][j].x = i;
+//	            nodes[i][j].y = j;
+//	            nodes[i][j].setWalkable(matrix[i][j] == 0);
+//	        }
+//	    }
+//	    return nodes;
+//	};
 
 
 	public T getCell(int x, int y) {
@@ -229,4 +234,8 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 		GridCell c = (GridCell)node;
 		return isWalkable(c.x, c.y);
 	};
+	
+	public T[][] getNodes(){
+		return nodes;
+	}
 }
