@@ -1,0 +1,130 @@
+//path finding project
+apply plugin: 'java'
+/*apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+sourceCompatibility = 1.6
+sourceSets.main.java.srcDirs = [ "pathfinding/src/" ]
+
+eclipse.project {
+    name = "path-finding"
+}
+
+tasks.eclipse.doLast {
+    delete ".project"
+}
+*/
+
+
+//maven publishing
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+ext.projectArtefactDir='dist/'
+ext.projectGroupId='com.github.xaguzman'
+ext.projectArtifactId='pathfinding'
+
+
+project.version = '0.2.1'
+
+compileJava {
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+}
+
+// Binary Jar
+jar {
+    destinationDir      = file(projectArtefactDir)
+    version             = project.version
+    manifest {
+        attributes(
+            "Implementation-Title"      : 'Path finding',
+            "Implementation-Version"    : project.version,
+            "Gradle-Version"            : project.gradle.gradleVersion,
+        )
+    }
+}
+
+
+task javadocJar(type: Jar){
+	classifier = 'javadoc'
+	from javadoc
+}
+
+task sourcesJar(type: Jar){
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts{
+	archives jar, javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+
+// Upload archives to OSS Sonatype
+//
+// NOTE: requires you to first setup
+// 1) ~/.gnupg/* with a PGP key to sign the artifacts
+// 2) ~/.gradle/gradle.properties defining
+//
+//    signing.keyId=<YOUR PGP KEY ID>
+//    signing.password=<PASSWORD TO PGP SECRET RING>
+//    signing.secretKeyRingFile=<FULLPATH TO PGP SECRET RING>
+//    ossrhUsername=<OSS Sonatype Username>
+//    ossrhPassword=<OSS Sonatype Password>
+//
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name 				'Path Finding'
+        description 		'A generic java path finding library, meant to be used in games'
+        version 			project.version
+        groupId 			projectGroupId
+        artifactId      	projectArtifactId
+
+        packaging 'jar'
+
+        url 'https://github.com/xaguzman/pathfinding'
+
+        scm {
+          connection 'scm:git:git://github.com/xaguzman/pathfinding.git'
+          developerConnection 'scm:git:git@github.com:xaguzman/pathfinding.git'
+          url 'http://github.com/xaguzman/pathfinding'
+        }
+
+        licenses {
+          license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'xaguzman'
+            name 'Xavier Guzman'
+            email 'xaguzman@gmail.com'
+            timezone 'CST  (GMT-6)'
+          }
+        }
+      }
+    }
+  }
+}

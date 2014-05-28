@@ -2,3 +2,6 @@
 *.class
 bin/
 target/
+build/
+dist/
+.gradle/
