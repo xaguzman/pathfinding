@@ -25,6 +25,7 @@ ext.projectArtefactDir='dist/'
 ext.projectGroupId='com.github.xaguzman'
 ext.projectArtifactId='pathfinding'
 
+sourceSets.main.java.srcDirs = [ "pathfinding/src/" ]
 
 project.version = '0.2.1'
 
@@ -47,12 +48,13 @@ jar {
 }
 
 
-task javadocJar(type: Jar){
+
+task javadocJar(type: Jar, dependsOn:javadoc){
 	classifier = 'javadoc'
 	from javadoc
 }
 
-task sourcesJar(type: Jar){
+task sourcesJar(type: Jar, dependsOn:classes){
 	classifier = 'sources'
 	from sourceSets.main.allSource
 }
