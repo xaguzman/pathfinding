@@ -5,3 +5,6 @@ target/
 build/
 dist/
 .gradle/
+*.project
+*.classpath
+.settings/

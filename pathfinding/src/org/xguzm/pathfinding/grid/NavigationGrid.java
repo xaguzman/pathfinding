@@ -19,42 +19,28 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	protected int width;
 	protected int height;
 	private List<T> neighbors = new ArrayList<T>();
-	//private GridFinderOptions defaultOptions = new GridFinderOptions();
 	
 	/** The nodes contained in the grid. They are stored as Grid[x][y] */
 	protected T[][] nodes;
 	
-//	public NavigationGrid(int width, int height, Class<T> clazz) throws InstantiationException, IllegalAccessException {
-//		this(width, height, clazz, null);
-//	}
-	
-//	/**
-//	 * The Grid class, which serves as the encapsulation of the layout of the nodes.
-//	 * @param width Number of columns of the grid.
-//	 * @param height Number of rows of the grid.
-//	 * @param matrix - A matrix( columns, rows) representing  the walkable status of the nodes(0 for walkable, everything else
-//	 * for unwalkable).
-//	 *     If the matrix is not supplied, all the nodes will be walkable.  
-//	 * @throws IllegalAccessException 
-//	 * @throws InstantiationException */
-//	public NavigationGrid(int width, int height, Class<T> clazz, int[][] matrix ) throws InstantiationException, IllegalAccessException {
-//	    this.width = width;
-//	    this.height = height;
-//	    this.nodes = buildNodes(width, height, clazz, matrix);
-//	}
 
-//	public NavigationGrid(int width, int height, T[][] nodes){
-//		this.width = width;
-//		this.height = height;
-//		this.nodes = nodes;
-//	}
+	/**
+	 * Creates an grid with no nodes.
+	 * If this constructor is used, make sure to call {@link NavigationGrid#setNodes(GridCell[][])} before trying to make
+	 * use of the grid cells.
+	 */ 
+	protected NavigationGrid(){ 
+		this(null); 
+	}
 	
 	public NavigationGrid(T[][] nodes){
-		this.width = nodes.length;
-		this.height = nodes[0].length;
+		if (nodes != null ){
+			this.width = nodes.length;
+			this.height = nodes[0].length;
+		}
 		this.nodes = nodes;
 	}
-
+	
 //	/**
 //	 * Build and return the nodes.
 //	 * @param columns the width (in cells) of this grid
@@ -237,5 +223,9 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	
 	public T[][] getNodes(){
 		return nodes;
+	}
+	
+	public void setNodes(T[][] nodes){
+		this.nodes = nodes;
 	}
 }
