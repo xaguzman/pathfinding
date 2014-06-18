@@ -27,7 +27,7 @@ ext.projectArtifactId='pathfinding'
 
 sourceSets.main.java.srcDirs = [ "pathfinding/src/" ]
 
-project.version = '0.2.1'
+project.version = '0.2.2'
 
 compileJava {
     sourceCompatibility = 1.6

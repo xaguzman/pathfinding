@@ -1,14 +1,11 @@
 package org.xguzm.pathfinding;
 
-import java.lang.reflect.Array;
 import java.util.Comparator;
-
-import org.xguzm.pathfinding.BHeapNode;
 
 /*
  * Slight modification over Nathan Sweet's implementation on libgdx.
  */
-public class BHeap<T extends BHeapNode<?>> {
+public class BHeap<T extends BHeapNode> {
 	
 	public int size = 0;
 
@@ -25,7 +22,7 @@ public class BHeap<T extends BHeapNode<?>> {
 	public BHeap (Comparator<T> comparator, Class<T> clazz ,int capacity, boolean isMaxHeap) {
 		//this.isMaxHeap = isMaxHeap;
 		this.clazz = clazz;
-		nodes = (T[]) Array.newInstance( clazz , capacity);// new GridCell[capacity];
+		nodes = (T[]) new Object[capacity];// new GridCell[capacity];
 		this.comparator = comparator;
 	}
 
@@ -33,7 +30,7 @@ public class BHeap<T extends BHeapNode<?>> {
 		// Expand if necessary.
 		if (size == nodes.length) {
 			@SuppressWarnings("unchecked")
-			T[] newNodes =  (T[]) Array.newInstance(clazz, size << 1);
+			T[] newNodes =  (T[])new Object[size << 1];
 			System.arraycopy(nodes, 0, newNodes, 0, size);
 			nodes = newNodes;
 		}

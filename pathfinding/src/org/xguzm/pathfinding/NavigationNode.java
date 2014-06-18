@@ -1,6 +1,6 @@
 package org.xguzm.pathfinding;
 
-public interface NavigationNode extends BHeapNode<NavigationNode>{
+public interface NavigationNode extends BHeapNode{
 	
 	/** The Node from which this node is reachable */
 	void setParent(NavigationNode parent);

@@ -214,8 +214,8 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 		return cell1.x == cell2.x || cell1.y == cell2.y  ? 
 				options.orthogonalMovementCost : options.diagonalMovementCost;
 	}
-
 	@Override
+	
 	public boolean isWalkable(T node) {
 		GridCell c = (GridCell)node;
 		return isWalkable(c.x, c.y);
