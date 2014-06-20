@@ -17,7 +17,7 @@ __________
 The library has been uploaded to sonatype oss repository.
 If you are using libgdx you can install it via graddle adding this dependency to your core project:
 
->	compile "com.github.xaguzman:pathfinding:0.2.1"
+>	compile "com.github.xaguzman:pathfinding:0.2.2"
 
 ## Intro
 The library works on a bunch of interfaces:
