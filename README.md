@@ -10,14 +10,14 @@ some modifications were made.
 
 This library works with Libgdx's html5 backend, it was even used in my [#1GAM january entry](https://github.com/xaguzman/shiftingislands/ "Shifting Islands Source").
 
-Current version is 0.2.2
+Current version is 0.2.3
 __________
 
 ## Installing
 The library has been uploaded to sonatype oss repository.
 If you are using libgdx you can install it via graddle adding this dependency to your core project:
 
->	compile "com.github.xaguzman:pathfinding:0.2.2"
+>	compile "com.github.xaguzman:pathfinding:0.2.3"
 
 ## Intro
 The library works on a bunch of interfaces:

@@ -5,32 +5,32 @@ import java.util.Comparator;
 /*
  * Slight modification over Nathan Sweet's implementation on libgdx.
  */
+@SuppressWarnings("unchecked")
 public class BHeap<T extends BHeapNode> {
 	
 	public int size = 0;
 
-	private T[] nodes;
+	private BHeapNode[] nodes;
 	//private final boolean isMaxHeap;
+	//Comparator<T> comparator;
+	//Class<T> clazz;
 	Comparator<T> comparator;
-	Class<T> clazz;
 
-	public BHeap (Comparator<T> comparator, Class<T> clazz) {
-		this(comparator, clazz ,16, false);
+	public BHeap(Comparator<T> comparator) {
+		this(comparator, 16);
 	}
 
-	@SuppressWarnings("unchecked")
-	public BHeap (Comparator<T> comparator, Class<T> clazz ,int capacity, boolean isMaxHeap) {
+	public BHeap (Comparator<T> comparator, int capacity) {
 		//this.isMaxHeap = isMaxHeap;
-		this.clazz = clazz;
-		nodes = (T[]) new Object[capacity];// new GridCell[capacity];
+		//this.clazz = clazz;
+		nodes = new BHeapNode[capacity];// new GridCell[capacity];
 		this.comparator = comparator;
 	}
 
 	public T add (T node) {
 		// Expand if necessary.
 		if (size == nodes.length) {
-			@SuppressWarnings("unchecked")
-			T[] newNodes =  (T[])new Object[size << 1];
+			BHeapNode[] newNodes =  new BHeapNode[size << 1];
 			System.arraycopy(nodes, 0, newNodes, 0, size);
 			nodes = newNodes;
 		}
@@ -43,12 +43,12 @@ public class BHeap<T extends BHeapNode> {
 
 	public T peek () {
 		if (size == 0) throw new IllegalStateException("The heap is empty.");
-		return nodes[0];
+		return (T)nodes[0];
 	}
 
 	public T pop () {
-		T[] nodes = this.nodes;
-		T popped = nodes[0];
+		BHeapNode[] nodes = this.nodes;
+		BHeapNode popped = nodes[0];
 		nodes[0] = nodes[--size];
 		nodes[size] = null;
 		if (size > 0) down(0);
@@ -70,14 +70,14 @@ public class BHeap<T extends BHeapNode> {
 	}
 
 	private void up (int index) {
-		T[] nodes = this.nodes;
-		T node = nodes[index];
+		BHeapNode[] nodes = this.nodes;
+		BHeapNode node = nodes[index];
 		//float value = node.f;
 		while (index > 0) {
 			int parentIndex = (index - 1) >> 1;
-			T parent = nodes[parentIndex];
+			BHeapNode parent = nodes[parentIndex];
 			//if ( value < parent.getValue()) {
-			if (comparator.compare(node, parent) < 0){
+			if (comparator.compare( (T) node, (T) parent) < 0){
 				nodes[index] = parent;
 				parent.setIndex(index);
 				index = parentIndex;
@@ -89,10 +89,10 @@ public class BHeap<T extends BHeapNode> {
 	}
 
 	private void down (int index) {
-		T[] nodes = this.nodes;
+		BHeapNode[] nodes = this.nodes;
 		int size = this.size;
 
-		T node = nodes[index];
+		BHeapNode node = nodes[index];
 		//float value = node.getValue();
 
 		while (true) {
@@ -101,11 +101,11 @@ public class BHeap<T extends BHeapNode> {
 			int rightIndex = leftIndex + 1;
 
 			// Always have a left child.
-			T leftNode = nodes[leftIndex];
+			BHeapNode leftNode = nodes[leftIndex];
 			//float leftValue = leftNode.getValue();
 
 			// May have a right child.
-			T rightNode;
+			BHeapNode rightNode;
 			//float rightValue;
 			if (rightIndex >= size) {
 				rightNode = null;
@@ -118,15 +118,15 @@ public class BHeap<T extends BHeapNode> {
 
 			// The smallest of the three values is the parent.
 			//if (leftValue < rightValue ^ isMaxHeap) {
-			if (comparator.compare(leftNode, rightNode) < 0){
+			if (comparator.compare( (T)leftNode, (T)rightNode) < 0){
 				//if (leftValue == value || (leftValue > value ^ isMaxHeap)) break;
-				if (leftNode == null || comparator.compare(leftNode, node) > 0) break;
+				if (leftNode == null || comparator.compare((T)leftNode, (T)node) > 0) break;
 				nodes[index] = leftNode;
 				leftNode.setIndex(index);
 				index = leftIndex;
 			} else {
 				//if (rightValue == value || (rightValue > value ^ isMaxHeap)) break;
-				if (rightNode == null || comparator.compare(rightNode, node) > 0) break;
+				if (rightNode == null || comparator.compare( (T)rightNode, (T)node) > 0) break;
 				nodes[index] = rightNode;
 				rightNode.setIndex(index);
 				index = rightIndex;

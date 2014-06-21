@@ -41,7 +41,7 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 		    		}
 		    		return (int)(o1.getF() - o2.getF());
 		    	}
-		}, clazz);
+		});
 	}
 	
 	public List<T> findPath(T startNode, T endNode, NavigationGraph<T> graph) {

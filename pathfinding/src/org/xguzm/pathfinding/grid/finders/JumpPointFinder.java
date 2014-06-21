@@ -45,7 +45,7 @@ public class JumpPointFinder<T extends GridCell> implements PathFinder<T>{
 	    		}
 	    		return (int)(o1.getF() - o2.getF());
 	    	}
-		}, clazz);
+		});
 	}
 	
 	@Override

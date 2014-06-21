@@ -27,7 +27,7 @@ ext.projectArtifactId='pathfinding'
 
 sourceSets.main.java.srcDirs = [ "pathfinding/src/" ]
 
-project.version = '0.2.2'
+project.version = '0.2.3'
 
 compileJava {
     sourceCompatibility = 1.6
@@ -51,7 +51,7 @@ jar {
 
 task javadocJar(type: Jar, dependsOn:javadoc){
 	classifier = 'javadoc'
-	from javadoc
+	from javadoc, sourceSets.main.allSource
 }
 
 task sourcesJar(type: Jar, dependsOn:classes){

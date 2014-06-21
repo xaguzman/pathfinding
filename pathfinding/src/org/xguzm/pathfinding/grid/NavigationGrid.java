@@ -137,7 +137,7 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	 * </pre>
 	 * 
 	 * @param node
-	 * @param options
+	 * @param opt
 	 */
 	@Override
 	public List<T> getNeighbors(T node, PathFinderOptions opt) {

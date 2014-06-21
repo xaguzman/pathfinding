@@ -11,13 +11,14 @@ import java.util.List;
  */
 public interface NavigationGraph<T extends NavigationNode> {
 	/**
-	 * Calls {@link #getNeighbors(node, PathFinderOptions)} with the default
-	 * {@link PathFinderOptions}
+	 * @param node the node to find the neighbors for
+	 * @return a list with all the adjacent nodes for the passed node, using the default options
 	 */
 	List<T> getNeighbors(T node);
 	
 	/**
-	 * @return a list containing the adjacent nodes for {@link node}, using the passed options
+	 * @param node the node to find the neighbors for
+	 * @return a list containing the adjacent nodes for the passed node, using the passed options
 	 */
 	List<T> getNeighbors(T node, PathFinderOptions opt);
 	

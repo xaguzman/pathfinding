@@ -2,6 +2,7 @@ package org.xguzm.pathfinding.grid.finders;
 
 import org.xguzm.pathfinding.Heuristic;
 import org.xguzm.pathfinding.PathFinderOptions;
+import org.xguzm.pathfinding.grid.NavigationGrid;
 import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
 
 /**
@@ -14,9 +15,9 @@ public class GridFinderOptions extends PathFinderOptions {
 	/** 
 	 * Wether diagonal movement is allowed within the grid.
 	 * 
-	 * </p>
+	 * <p>
 	 * <b>Note:</b> This will be ignored in {@link JumpPointFinder}, as diagonal movement is required for it
-	 * </p>
+	 * <p>
 	 * 
 	 * Default value is true
 	 */
@@ -24,7 +25,7 @@ public class GridFinderOptions extends PathFinderOptions {
 	
 	/** When true, diagonal movement requires both neighbors to be open.
 	 * When false, diagonal movement can be achieved by having only one open nighbor
-	 * </p>
+	 * <p>
 	 *  
 	 * Example: To go from (1,1) to (2,2) when this is set to true, where (x) denotes a non walkable cell,
 	 * the following applies
@@ -50,7 +51,7 @@ public class GridFinderOptions extends PathFinderOptions {
 	 * </pre>
 	 * 
 	 * If {@link #allowDiagonal} is false, this setting is ignored.
-	 * </p>
+	 * <p>
 	 * Default value is true
 	 */
 	public boolean dontCrossCorners;
@@ -59,7 +60,7 @@ public class GridFinderOptions extends PathFinderOptions {
 	/** When false, (0,0) is located at the bottom left of the grid. When true, (0,0) is located
 	 * at the top left of the grid
 	 *
-	 *</p>
+	 *<p>
 	 * Default value is false
 	 */
 	public boolean isYDown ;
@@ -79,6 +80,7 @@ public class GridFinderOptions extends PathFinderOptions {
 	 * {@link #isYDown} = false
 	 * {@link #orthogonalMovementCost} = 1
 	 * {@link #diagonalMovementCost} = 1.4
+	 * </pre>
 	 */
 	public GridFinderOptions(){
 		this(true, true, new ManhattanDistance(), false, 1, 1.4f);
