@@ -1,38 +1,29 @@
-//path finding project
 apply plugin: 'java'
-/*apply plugin: 'eclipse'
+apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-
-sourceCompatibility = 1.6
-sourceSets.main.java.srcDirs = [ "pathfinding/src/" ]
-
-eclipse.project {
-    name = "path-finding"
-}
-
-tasks.eclipse.doLast {
-    delete ".project"
-}
-*/
-
-
-//maven publishing
-apply plugin: 'maven'
-apply plugin: 'signing'
 
 ext.projectArtefactDir='dist/'
 ext.projectGroupId='com.github.xaguzman'
 ext.projectArtifactId='pathfinding'
 
-sourceSets.main.java.srcDirs = [ "pathfinding/src/" ]
-
 project.version = '0.2.3'
+
+repositories{
+	mavenCentral()
+}
+
+dependencies { 
+	testCompile 'junit:junit:4.10'
+}
 
 compileJava {
     sourceCompatibility = 1.6
     targetCompatibility = 1.6
 }
+
+sourceSets.main.java.srcDirs = [ "src/main/" ]
+sourceSets.test.java.srcDirs = [ "src/tests/" ]
 
 // Binary Jar
 jar {
@@ -63,10 +54,14 @@ artifacts{
 	archives jar, javadocJar, sourcesJar
 }
 
+
+//maven publishing
+apply plugin: 'maven'
+apply plugin: 'signing'
+
 signing {
     sign configurations.archives
 }
-
 
 // Upload archives to OSS Sonatype
 //
