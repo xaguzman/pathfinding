@@ -32,8 +32,9 @@ Finders are fed with so called PathFinderOptions, which determine how the pathfi
 
 ## How to use
 You need to create a graph.
+Be aware the the NavigationGrid class, expects a bidimensional array of GridCell stored as [x][y]
 
-
+	//these should be stored as [x][y]
 	GridCell[][] cells = new GridCell[5][5];
 	
 	//create your cells with whatever data you need
@@ -55,7 +56,7 @@ Now, you need a finder which can work on your graph.
 
 Once you have both, a graph and a finder, you can find paths within your graph at any time.
 
-	List<GridCell> pathToEnd = findPath(0, 0, 4, 3, navGrid);
+	List<GridCell> pathToEnd = finder.findPath(0, 0, 4, 3, navGrid);
 	
 That's pretty much all there is to using the library.
 
