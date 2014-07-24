@@ -30,7 +30,7 @@ public class NavGraphFactory {
 				cells[x][invY] = cell;
 			}
 
-		return new NavigationGrid<>(cells);
+		return new NavigationGrid<GridCell>(cells);
 
 	}
 }

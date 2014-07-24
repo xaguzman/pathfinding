@@ -22,6 +22,7 @@ compileJava {
     targetCompatibility = 1.6
 }
 
+sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/main/" ]
 sourceSets.test.java.srcDirs = [ "src/tests/" ]
 
