@@ -1,0 +1,9 @@
+sourceCompatibility = 1.6
+sourceSets.main.java.srcDirs = [ "src/main/" ]
+//sourceSets.test.java.srcDirs = [ "src/tests/" ]
+
+project.archivesBaseName  = 'pathfinding-gdx-bridge'
+
+eclipse.project {
+    name = projectGroup + "-gdx-bridge"
+}
