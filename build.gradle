@@ -54,7 +54,6 @@ subprojects{
 }
 
 project(':pathfinding'){
-  //apply from: '../publish.gradle'
 }
 
 project(':gdx-bridge'){
@@ -66,4 +65,8 @@ project(':gdx-bridge'){
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
+}
+
+tasks.eclipse.doLast {
+    delete ".project"
 }
