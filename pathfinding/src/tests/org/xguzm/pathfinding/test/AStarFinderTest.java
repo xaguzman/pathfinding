@@ -60,10 +60,10 @@ public class AStarFinderTest {
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
 			
-			//the distance should not be greater than one, otherwise, a diagonal movement occured
+			//the distance should be greater than one, otherwise, no diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
 			
-			if (dst == 1) diagonalCount++;
+			if (dst > 1) diagonalCount++;
 		}
 		
 		assertTrue("No diagonal movement during diagonal movement test", diagonalCount > 0);
