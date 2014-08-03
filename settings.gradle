@@ -1,1 +1,1 @@
-include 'pathfinding', 'gdx-bridge'
+include 'pathfinding', 'gdx-bridge', 'tests'

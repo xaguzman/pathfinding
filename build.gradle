@@ -49,18 +49,32 @@ subprojects{
   }
 
   buildDir = rootProject.buildDir
-
-  apply from : '../publish.gradle'
 }
 
 project(':pathfinding'){
+	apply from : '../publish.gradle'
+
+	dependencies { 
+		testCompile 'junit:junit:4.10'
+	}
 }
 
 project(':gdx-bridge'){
-  dependencies {
-    compile project(":pathfinding")
-    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+   apply from : '../publish.gradle'
+   dependencies {
+   	compile project(":pathfinding")
+   	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
   }
+}
+
+project(':tests'){
+	dependencies {
+    	compile project(":pathfinding")
+    	compile project(":gdx-bridge")
+    	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    	compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+      compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+  	}
 }
 
 task wrapper(type: Wrapper) {
