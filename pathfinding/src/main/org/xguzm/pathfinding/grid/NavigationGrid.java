@@ -25,7 +25,7 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 
 	/**
 	 * Creates an grid with no nodes.
-	 * If this constructor is used, make sure to call {@link NavigationGrid#setNodes(GridCell[][])} before trying to make
+	 * If this constructor is used, make sure to call {@link NavigationGrid#setNodes(NavigationGridGraphNode[][])} before trying to make
 	 * use of the grid cells.
 	 */ 
 	public NavigationGrid(){ 
