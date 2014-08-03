@@ -5,6 +5,8 @@ import java.util.List;
 import org.xguzm.pathfinding.finders.AStarFinder;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;
+import org.xguzm.pathfinding.grid.NavigationGridGraph;
+import org.xguzm.pathfinding.grid.NavigationGridGraphNode;
 
 /**
  * A helper class to which lets you find a path based on coordinates rather than nodes on {@link NavigationGrid}'s.
@@ -13,7 +15,7 @@ import org.xguzm.pathfinding.grid.NavigationGrid;
  *
  * @param <T> any class that inherits from {@link GridCell}
  */
-public class AStarGridFinder<T extends GridCell> extends AStarFinder<T> {
+public class AStarGridFinder<T extends NavigationGridGraphNode> extends AStarFinder<T> {
 
 	public AStarGridFinder(Class<T> clazz) {
 		this(clazz, new GridFinderOptions());
@@ -28,7 +30,7 @@ public class AStarGridFinder<T extends GridCell> extends AStarFinder<T> {
 	 * 
 	 * @return The path from [startX, startY](exclusive) to [endX, endY] 
 	 */
-	public List<T> findPath(int startX, int startY, int endX, int endY, NavigationGrid<T> grid) {
+	public List<T> findPath(int startX, int startY, int endX, int endY, NavigationGridGraph<T> grid) {
 		return findPath(grid.getCell(startX, startY), grid.getCell(endX, endY), grid); 	    
 	}
 

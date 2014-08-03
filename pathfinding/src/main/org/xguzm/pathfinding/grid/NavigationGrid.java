@@ -3,7 +3,6 @@ package org.xguzm.pathfinding.grid;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.xguzm.pathfinding.NavigationGraph;
 import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 
@@ -15,7 +14,7 @@ import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
  *
  * @param <T> only classes extending {@link GridCell} can be used within this graph
  */
-public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
+public class NavigationGrid<T extends NavigationGridGraphNode> implements NavigationGridGraph<T> {
 	protected int width;
 	protected int height;
 	private List<T> neighbors = new ArrayList<T>();
@@ -29,7 +28,7 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	 * If this constructor is used, make sure to call {@link NavigationGrid#setNodes(GridCell[][])} before trying to make
 	 * use of the grid cells.
 	 */ 
-	protected NavigationGrid(){ 
+	public NavigationGrid(){ 
 		this(null); 
 	}
 	
@@ -40,45 +39,17 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 		}
 		this.nodes = nodes;
 	}
-	
-//	/**
-//	 * Build and return the nodes.
-//	 * @param columns the width (in cells) of this grid
-//	 * @param rows the height (in cells) of this grid
-//	 * @param matrix - A matrix representing the walkable status of the nodes. 0 is walkable, any other
-//	 * value will be unwalkable
-//	 * @throws IllegalAccessException 
-//	 * @throws InstantiationException 
-//	 */
-//	@SuppressWarnings("unchecked")
-//	private T[][] buildNodes(int columns, int rows, Class<T> clazz, int[][] matrix) throws InstantiationException, IllegalAccessException {
-//		if (matrix == null) {
-//	        return nodes;
-//	    }
-//		
-//		if (matrix.length != columns || matrix[0].length != rows) {
-//	        throw new IllegalArgumentException("Matrix size does not fit");
-//	    }
-//		
-//		T[][]nodes = (T[][])Array.newInstance(clazz, columns, rows);
-//		
-//		int i, j;
-//	    for (i = 0; i < columns; ++i) {
-//	        for (j = 0; j < rows; ++j) {
-//	            nodes[i][j] = clazz.newInstance();
-//	            nodes[i][j].x = i;
-//	            nodes[i][j].y = j;
-//	            nodes[i][j].setWalkable(matrix[i][j] == 0);
-//	        }
-//	    }
-//	    return nodes;
-//	};
-
-
+		
+	@Override
 	public T getCell(int x, int y) {
 	    return this.contains(x, y)  ? this.nodes[x][y] : null; 
 	};
-
+	
+	@Override
+	public void setCell(int x, int y, T cell){
+		if ( this.contains(x, y) )
+			nodes[x][y] = cell;
+	}
 
 	/**
 	 * Determine whether the node at the given position is walkable.
@@ -145,7 +116,7 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 		boolean allowDiagonal = options.allowDiagonal;
 		boolean dontCrossCorners = options.dontCrossCorners;
 		int yDir = options.isYDown ?  -1 : 1;
-	    int x = node.x, y = node.y;
+	    int x = node.getX(), y = node.getY();
 	    neighbors.clear();
         boolean s0 = false, d0 = false, s1 = false, d1 = false,
         		s2 = false, d2 = false, s3 = false, d3 = false;
@@ -214,8 +185,8 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 		return cell1.x == cell2.x || cell1.y == cell2.y  ? 
 				options.orthogonalMovementCost : options.diagonalMovementCost;
 	}
-	@Override
 	
+	@Override
 	public boolean isWalkable(T node) {
 		GridCell c = (GridCell)node;
 		return isWalkable(c.x, c.y);
@@ -227,5 +198,28 @@ public class NavigationGrid<T extends GridCell> implements NavigationGraph<T> {
 	
 	public void setNodes(T[][] nodes){
 		this.nodes = nodes;
+		this.width = nodes.length;
+		this.height = nodes[0].length;
+	}
+
+	@Override
+	public int getWidth() {
+		return width;
+	}
+
+	@Override
+	public void setWidth(int width) {
+		this.width = width;
+		
+	}
+
+	@Override
+	public int getHeight() {
+		return height;
+	}
+
+	@Override
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }

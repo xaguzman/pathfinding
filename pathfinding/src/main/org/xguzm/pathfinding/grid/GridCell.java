@@ -3,7 +3,7 @@ package org.xguzm.pathfinding.grid;
 import org.xguzm.pathfinding.NavigationNode;
 
 
-public class GridCell implements NavigationNode{
+public class GridCell implements NavigationGridGraphNode{
 	public int x;
 	public int y;
 	
@@ -27,12 +27,15 @@ public class GridCell implements NavigationNode{
 		this.x = column;
 		this.isWalkable = isWalkable;
 	}
+	
+	
 
 	@Override
 	public void setIndex(int index) {
 		this.index = index;		
 	}
 
+	
 	@Override
 	public int getIndex() {
 		return index;
@@ -107,5 +110,26 @@ public class GridCell implements NavigationNode{
 	@Override
 	public String toString() {
 		return "[" + x + ", " + y + "]";
+	}
+
+	@Override
+	public int getX() {
+		return x;
+	}
+
+	@Override
+	public int getY() {
+		return y;
+	}
+
+	@Override
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	@Override
+	public void setY(int y) {
+		this.y = y;
+		
 	}
 }
