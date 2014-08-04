@@ -1,10 +1,7 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-println project.name
-
-group = 'com.github.xaguzman'
-project.version = '0.2.4-SNAPSHOT'  
+project.version = '0.2.4-SNAPSHOT' 
 
 artifacts{
   archives jar, javadocJar, sourcesJar
@@ -13,6 +10,8 @@ artifacts{
 signing {
     sign configurations.archives
 }
+
+
 
 // Upload archives to OSS Sonatype
 //
@@ -44,11 +43,9 @@ uploadArchives {
         name          'Path Finding'
         description   'A generic java path finding library, meant to be used in games'
         version       project.version
-        //groupId       projectGroupId
-        //artifactId    coreArtifact
+        groupId       'com.github.xaguzman'
 
         packaging 'jar'
-
         url 'https://github.com/xaguzman/pathfinding'
 
         scm {

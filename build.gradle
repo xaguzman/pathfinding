@@ -26,7 +26,7 @@ allprojects{
 ext{
   projectGroup = 'pathfinding'
   gdxVersion = '1.2.0'
-  distDir = file('dist/')
+  distDir = file('dist/')   
 }
 
 
@@ -49,6 +49,8 @@ subprojects{
   }
 
   buildDir = rootProject.buildDir
+
+
 }
 
 project(':pathfinding'){
@@ -60,7 +62,8 @@ project(':pathfinding'){
 }
 
 project(':gdx-bridge'){
-   apply from : '../publish.gradle'
+	apply from : '../publish.gradle'
+
    dependencies {
    	compile project(":pathfinding")
    	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -77,6 +80,8 @@ project(':tests'){
   	}
 }
 
+
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
@@ -84,3 +89,4 @@ task wrapper(type: Wrapper) {
 tasks.eclipse.doLast {
     delete ".project"
 }
+
