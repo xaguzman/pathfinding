@@ -23,6 +23,7 @@ If you are using libgdx you can install it via graddle adding this dependency to
 If you want to try the gdx-bridge, you need to use the 0.2.4-SNAPSHOT version, and add a new dependency to your project.
 
 >	compile "com.github.xaguzman:pathfinding:0.2.4-SNAPSHOT"
+
 >	compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.4-SNAPSHOT"
 
 Right now there's no documentation for using the gdx-bridge. For a quick reference on how to use the gdx-bridge, please see this [test](https://github.com/xaguzman/pathfinding/blob/master/tests/src/main/org/xguzm/pathfinding/tests/MapLoadingTest.java "MapLoadingTest")
