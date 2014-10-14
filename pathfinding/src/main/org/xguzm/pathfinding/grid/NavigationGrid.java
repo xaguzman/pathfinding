@@ -180,6 +180,10 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 
 	@Override
 	public float getMovementCost(T node1, T node2, PathFinderOptions opt) {
+		
+		if (node1 == node2)
+			return 0;
+		
 		GridFinderOptions options = (GridFinderOptions)opt;
 		GridCell cell1 = (GridCell) node1, cell2 = (GridCell) node2;
 		return cell1.x == cell2.x || cell1.y == cell2.y  ? 

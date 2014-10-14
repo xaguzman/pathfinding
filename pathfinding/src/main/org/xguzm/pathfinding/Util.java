@@ -12,7 +12,7 @@ public class Util {
 		path.clear();
 		path.add(node);
 		T node1 = node;
-		while (node1.getParent() != null){
+		while (node1.getParent() != null && node1 != node1.getParent()){
 			node1 = (T)node1.getParent();
 			path.add(0, node1);
 		}

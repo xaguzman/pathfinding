@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.xguzm.pathfinding.BHeap;
 import org.xguzm.pathfinding.NavigationGraph;
+import org.xguzm.pathfinding.NavigationNode;
 import org.xguzm.pathfinding.PathFinder;
 import org.xguzm.pathfinding.Util;
 import org.xguzm.pathfinding.grid.NavigationGridGraph;
@@ -40,6 +41,7 @@ public class ThetaStarGridFinder<T extends NavigationGridGraphNode> implements P
 		return findPath(grid.getCell(startX, startY), grid.getCell(endX, endY), grid); 	    
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<T> findPath(T startNode, T endNode, NavigationGraph<T> graph) {
 		if (jobId == Integer.MAX_VALUE)
 			jobId = 0;
@@ -79,9 +81,18 @@ public class ThetaStarGridFinder<T extends NavigationGridGraphNode> implements P
 	            if (neighbor.getClosedOnJob() == job || !graph.isWalkable(neighbor)) {
 	                continue;
 	            }
-
-	            // get the distance between current node and the neighbor and calculate the next g score
-	            ng = node.getG() + graph.getMovementCost(node, neighbor, defaultOptions);
+	            
+	            T parent = null;
+	            
+	            if( lineOfSight( node.getParent(), neighbor, (NavigationGridGraph<T>)graph )){
+	            	// get the distance between parent node and the neighbor and calculate the next g score
+	            	ng = node.getParent().getG() + graph.getMovementCost((T)node.getParent(), neighbor, defaultOptions);
+	            	parent = (T)node.getParent();
+	            }else{
+	            	// get the distance between current node and the neighbor and calculate the next g score
+		            ng = node.getG() + graph.getMovementCost(node, neighbor, defaultOptions);
+		            parent = node;
+	            }
 
 	            // check if the neighbor has not been inspected yet, or can be reached with smaller cost from the current node
 	            if (neighbor.getOpenedOnJob() != job || ng < neighbor.getG()) {
@@ -90,7 +101,7 @@ public class ThetaStarGridFinder<T extends NavigationGridGraphNode> implements P
 
 	                neighbor.setH(defaultOptions.heuristic.calculate(neighbor, endNode));
 	                neighbor.setF( neighbor.getG() + neighbor.getH());
-	                neighbor.setParent(node);
+	                neighbor.setParent(parent);
 
 	                if (neighbor.getOpenedOnJob() != job) {
 	                    openList.add(neighbor);
@@ -98,7 +109,7 @@ public class ThetaStarGridFinder<T extends NavigationGridGraphNode> implements P
 	                } else {
 	                    // the neighbor can be reached with smaller cost.
 	                    // Since its f value has been updated, we have to update its position in the open list
-	                    openList.updateNode(neighbor, node.getF() - prevf);
+	                    openList.updateNode(neighbor, neighbor.getF() - prevf);
 	                }
 	            }
 	        } 
@@ -107,14 +118,14 @@ public class ThetaStarGridFinder<T extends NavigationGridGraphNode> implements P
 	    // fail to find the path
 	    return null;
 	}
-	
-	private void setVertext(NavigationGridGraphNode node){
 		
-	}
-	
-	private boolean lineOfSight(NavigationGridGraphNode node, NavigationGridGraphNode neighbor, NavigationGridGraph<T> graph){
+	private boolean lineOfSight(NavigationNode from, NavigationNode to, NavigationGridGraph<T> graph){
+		if (from == null || to == null)
+			return false;
+		
+		NavigationGridGraphNode node = (NavigationGridGraphNode) from, neigh = (NavigationGridGraphNode) to;
 		int x1 = node.getX(), y1 = node.getY();
-		int x2 = neighbor.getX(), y2 = neighbor.getY();
+		int x2 = neigh.getX(), y2 = neigh.getY();
 		int dx = Math.abs(x1 - x2);
 		int dy = Math.abs(y1 - y2);
 		int xinc = (x1 < x2) ? 1 : -1;

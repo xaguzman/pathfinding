@@ -132,7 +132,7 @@ public class JumpPointFinder<T extends NavigationGridGraphNode> implements
 					// the neighbor can be reached with smaller cost.
 					// Since its f value has been updated, we have to update its
 					// position in the open list
-					openList.updateNode(neighbor, node.getF() - prevf);
+					openList.updateNode(neighbor, neighbor.getF() - prevf);
 				}
 			}
 		}
