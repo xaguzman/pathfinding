@@ -9,7 +9,7 @@ import org.xguzm.pathfinding.grid.NavigationGridGraph;
 import org.xguzm.pathfinding.grid.NavigationGridGraphNode;
 
 /**
- * A helper class to which lets you find a path based on coordinates rather than nodes on {@link NavigationGrid}'s.
+ * A helper class to which lets you find a path based on coordinates rather than nodes on {@link NavigationGridGraph}'s.
  * 
  * @author Xavier Guzman
  *

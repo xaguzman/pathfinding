@@ -38,9 +38,12 @@ public class AStarFinderTest {
 		
 		ManhattanDistance heuristic = new ManhattanDistance();
 		
+		System.out.println("No diagonal movement allowed: ");
 		for(int i = 1; i < path.size(); i++){
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
+			
+			System.out.println("Path1: (" + (i) + ") " + current);
 			
 			//the distance should not be greater than one, otherwise, a diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
@@ -56,12 +59,14 @@ public class AStarFinderTest {
 		assertNotNull(String.format("No path found from %s to %s for diagnoal movement", start, end), path);
 		
 		int diagonalCount = 0;
+		System.out.println("\nDiagonal movement allowed: ");
 		for(int i = 1; i < path.size(); i++){
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
 			
 			//the distance should be greater than one, otherwise, no diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
+			System.out.println("Path2: (" + (i) + ") " + current);
 			
 			if (dst > 1) diagonalCount++;
 		}

@@ -2,11 +2,11 @@ package org.xguzm.pathfinding.grid.finders;
 
 import org.xguzm.pathfinding.Heuristic;
 import org.xguzm.pathfinding.PathFinderOptions;
-import org.xguzm.pathfinding.grid.NavigationGrid;
+import org.xguzm.pathfinding.grid.NavigationGridGraph;
 import org.xguzm.pathfinding.grid.heuristics.ManhattanDistance;
 
 /**
- * The options for the pathfinding behavior on a {@link NavigationGrid}.
+ * The options for the pathfinding behavior on a {@link NavigationGridGraph}.
  * 
  * @author Xavier Guzman
  */

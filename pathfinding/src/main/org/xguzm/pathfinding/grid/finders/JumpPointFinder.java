@@ -16,17 +16,15 @@ import org.xguzm.pathfinding.grid.NavigationGridGraphNode;
 import org.xguzm.pathfinding.grid.heuristics.EuclideanDistance;
 
 /**
- * Optimization over A*. This will always use @{link {@link EuclideanDistance},
- * regardless of the one set in the passed {@link #options}. This should only be
- * used on {@link NavigationGrid}
+ * Optimization over A*. This will always use @{link {@link EuclideanDistance}, regardless of the one set in the passed {@link #options}. 
+ * This should only be used on {@link NavigationGridGraph}
  * 
  * @author Xavier Guzman
  *
  * @param <T>
  *            any class extending from {@link GridCell}
  */
-public class JumpPointFinder<T extends NavigationGridGraphNode> implements
-		PathFinder<T> {
+public class JumpPointFinder<T extends NavigationGridGraphNode> implements PathFinder<T> {
 	BHeap<T> openList;
 	private GridFinderOptions options;
 	int jobId;

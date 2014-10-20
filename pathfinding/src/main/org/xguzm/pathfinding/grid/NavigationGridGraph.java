@@ -39,10 +39,10 @@ public interface NavigationGridGraph<T extends NavigationGridGraphNode> extends 
 	
 	/**
 	 * Determine whether the node at the given position is walkable.
-	 * (Also returns false if the position is outside the grid.)
+	 * 
 	 * @param x - The x / column coordinate of the node.
 	 * @param y - The y / row coordinate of the node.
-	 * @return true if the node at (x,y) is walkable
+	 * @return true if the node at [x,y] is walkable, false if it is not walkable (or if [x,y] is not within the grid's limit)
 	 */
 	boolean isWalkable(int x, int y);
 	

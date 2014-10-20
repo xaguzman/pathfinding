@@ -35,6 +35,10 @@ public class ThetaStarFinderTest {
 		assertNotNull(String.format("No path found from %s to %s for orthogonal movement", start, end), path);
 				
 		//TODO: smarter test...how to make sure path is smooth?
+		int i =0 ;
+		for(GridCell cell : path){
+			System.out.println("Path1: (" + (i++) + ") " + cell);
+		}
 		
 		//test diagonal movement 
 		opt.allowDiagonal = true;
@@ -43,6 +47,10 @@ public class ThetaStarFinderTest {
 		assertNotNull(String.format("No path found from %s to %s for diagnoal movement", start, end), path);
 		
 		//TODO: smarter test...how to make sure path is smooth?
+		i =0 ;
+		for(GridCell cell : path){
+			System.out.println("Path2: (" + (i++) + ") " + cell);
+		}
 	}
 
 }

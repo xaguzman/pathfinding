@@ -3,11 +3,12 @@ package org.xguzm.pathfinding.grid;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.xguzm.pathfinding.NavigationGraph;
 import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
 
 /**
- * A {@link NavigationGrid} which is represented as a grid or a table.
+ * A {@link NavigationGraph} which is represented as a grid or a table.
  * The nodes are accessible through (x, y) coordinates. 
  * 
  * @author Xavier Guzman
@@ -53,10 +54,10 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 
 	/**
 	 * Determine whether the node at the given position is walkable.
-	 * (Also returns false if the position is outside the grid.)
+	 * 
 	 * @param x - The x / column coordinate of the node.
 	 * @param y - The y / row coordinate of the node.
-	 * @return true if the node at (x,y) is walkable
+	 * @return true if the node at [x,y] is walkable, false if it is not walkable (or if [x,y] is not within the grid's limit)
 	 */
 	public boolean isWalkable(int x, int y) {
 	    return this.contains(x, y) && this.nodes[x][y].isWalkable();
