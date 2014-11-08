@@ -54,18 +54,21 @@ Be aware the the NavigationGrid class, expects a bidimensional array of GridCell
 
 Now, you need a finder which can work on your graph.
 
-	//create a finder either using the default options
-	AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
+```java
+//create a finder either using the default options
+AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class);
 	
-	//or create your own pathfinder options:
-	GridFinderOptions opt = new GridFinderOptions();
-	opt.allowDiagonal = false;
+//or create your own pathfinder options:
+GridFinderOptions opt = new GridFinderOptions();
+opt.allowDiagonal = false;
 	
-	AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
-
+AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
+```
 Once you have both, a graph and a finder, you can find paths within your graph at any time.
 
-	List<GridCell> pathToEnd = finder.findPath(0, 0, 4, 3, navGrid);
+```java
+List<GridCell> pathToEnd = finder.findPath(0, 0, 4, 3, navGrid);
+```
 	
 That's pretty much all there is to using the library.
 
