@@ -43,14 +43,16 @@ Finders are fed with so called PathFinderOptions, which determine how the pathfi
 You need to create a graph.
 Be aware the the NavigationGrid class, expects a bidimensional array of GridCell stored as [x][y]
 
-	//these should be stored as [x][y]
-	GridCell[][] cells = new GridCell[5][5];
+```java	
+//these should be stored as [x][y]
+GridCell[][] cells = new GridCell[5][5];
 	
-	//create your cells with whatever data you need
-	cells = createCells();
+//create your cells with whatever data you need
+cells = createCells();
 	
-	//create a navigation grid with the cells you just created
-	NavigationGrid<GridCell> navGrid = new NavigationGrid(cells);
+//create a navigation grid with the cells you just created
+NavigationGrid<GridCell> navGrid = new NavigationGrid(cells);
+```
 
 Now, you need a finder which can work on your graph.
 
