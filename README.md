@@ -34,6 +34,8 @@ The library works on a bunch of interfaces:
 	* AStarFinder
 	* AStarGridFinder
 	* JumpPointFinder
+	* ThetaStarFinder
+	* ThetaStarGridFinder
 
 Finders are fed with so called PathFinderOptions, which determine how the pathfinding will work (allowing diagonal movement, for example).
 
