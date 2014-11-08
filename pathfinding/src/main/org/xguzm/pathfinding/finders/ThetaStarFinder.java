@@ -89,7 +89,7 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	            
 	            T parent = null;
 	            
-	            if( lineOfSight( node.getParent(), neighbor, graph )){
+	            if( graph.lineOfSight( node.getParent(), neighbor )){
 	            	// get the distance between parent node and the neighbor and calculate the next g score
 	            	ng = node.getParent().getG() + graph.getMovementCost((T)node.getParent(), neighbor, defaultOptions);
 	            	parent = (T)node.getParent();
@@ -123,7 +123,4 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	    // fail to find the path
 	    return null;
 	}
-		
-	protected abstract boolean lineOfSight(NavigationNode from, NavigationNode to, NavigationGraph<T> graph);
-
 }

@@ -2,6 +2,9 @@ package org.xguzm.pathfinding;
 
 import java.util.List;
 
+import org.xguzm.pathfinding.grid.NavigationGridGraph;
+import org.xguzm.pathfinding.grid.NavigationGridGraphNode;
+
 /**
  * A collection of {@link NavigationNode}.
  * 
@@ -27,5 +30,7 @@ public interface NavigationGraph<T extends NavigationNode> {
 	
 	
 	boolean isWalkable(T node );
+	
+	boolean lineOfSight(NavigationNode from, NavigationNode to);
 	
 }

@@ -2,6 +2,7 @@ package org.xguzm.pathfinding.gdxbridge;
 
 import java.util.List;
 
+import org.xguzm.pathfinding.NavigationNode;
 import org.xguzm.pathfinding.PathFinderOptions;
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;
@@ -94,6 +95,11 @@ public class NavigationTiledMapLayer extends MapLayer implements NavigationGridG
 	@Override
 	public void setHeight(int height) {
 		navGrid.setHeight(height);
+	}
+
+	@Override
+	public boolean lineOfSight(NavigationNode from, NavigationNode to) {
+		return navGrid.lineOfSight(from, to);
 	}
 
 }

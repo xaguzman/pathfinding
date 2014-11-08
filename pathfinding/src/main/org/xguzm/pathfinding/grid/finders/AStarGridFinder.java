@@ -3,8 +3,6 @@ package org.xguzm.pathfinding.grid.finders;
 import java.util.List;
 
 import org.xguzm.pathfinding.finders.AStarFinder;
-import org.xguzm.pathfinding.grid.GridCell;
-import org.xguzm.pathfinding.grid.NavigationGrid;
 import org.xguzm.pathfinding.grid.NavigationGridGraph;
 import org.xguzm.pathfinding.grid.NavigationGridGraphNode;
 
@@ -13,7 +11,7 @@ import org.xguzm.pathfinding.grid.NavigationGridGraphNode;
  * 
  * @author Xavier Guzman
  *
- * @param <T> any class that inherits from {@link GridCell}
+ * @param <T> any class that inherits from {@link NavigationGridGraphNode}
  */
 public class AStarGridFinder<T extends NavigationGridGraphNode> extends AStarFinder<T> {
 
