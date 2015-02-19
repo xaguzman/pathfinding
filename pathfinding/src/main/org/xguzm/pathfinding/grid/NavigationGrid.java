@@ -34,12 +34,40 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 		this(null); 
 	}
 	
+
+	/** 
+	 * Constructs the grid by using the given nodes. 
+	
+	 * This is the old way to biuld the grid, which now just calls {@link #NavigationGrid(T[][] nodes, boolean)} with autoAssignXY = false.
+	 * Kept only for compatibility with older vesions.
+	 * 
+	 * @param nodes the ready-to-use nodes
+	 * */
+	@Deprecated	
 	public NavigationGrid(T[][] nodes){
-		if (nodes != null ){
-			this.width = nodes.length;
-			this.height = nodes[0].length;
-		}
-		this.nodes = nodes;
+		this(nodes, false);
+	}
+	
+	/** Constructs the grid by using the given nodes. If autoAssignXY == true, the grid will automatically assign x, y values, under
+	 * the assumption that nodes[0][0] is the lower left corner of the grid. 
+	 * 
+	 * <pre>
+	 *   -----------------------
+	 *  |  0,2	|       |  2,2  |
+	 *   -----------------------
+	 *  |      |       |       |
+	 *   -----------------------
+	 *  |  0,0	|       |  2,0  |
+	 *   -----------------------
+	 *  
+	 * </pre>
+	 * 
+	 * 
+	 * @param nodes the nodes which compose the graph. Can be null if you plan to set the nodes later
+	 * @param autoAssignXY wetherTo automatically assign coordinates to your nodes 
+	 * */
+	public NavigationGrid(T[][] nodes, boolean autoAssignXY){
+		setNodes(nodes, autoAssignXY);		
 	}
 		
 	@Override
@@ -203,9 +231,44 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 	}
 	
 	public void setNodes(T[][] nodes){
+		setNodes(nodes, true);
+	}
+	
+	/** Sets the grid nodes. If autoAssignXY == true, the grid will automatically assign x, y values, under
+	 * the assumption that nodes[0][0] is the lower left corner of the grid. 
+	 * 
+	 * <pre>
+	 *   -----------------------
+	 *  |  0,2	|       |  2,2  |
+	 *   -----------------------
+	 *  |      |       |       |
+	 *   -----------------------
+	 *  |  0,0	|       |  2,0  |
+	 *   -----------------------
+	 * </pre>
+	 * 
+	 * @param nodes the nodes which compose the graph. Can be null if you plan to set the nodes later
+	 * @param autoAssignXY wetherTo automatically assign coordinates to your nodes 
+	 * */
+	public void setNodes(T[][] nodes, boolean autoAssignXY){
+		if (nodes != null ){
+			this.width = nodes.length;
+			this.height = nodes[0].length;
+			
+			if (autoAssignXY){
+				for(int x = 0; x < width; x++){
+					for(int y = 0; y < height; y++){
+						nodes[x][y].setX(x); 
+						nodes[x][y].setY(y);
+					}
+				}
+			}
+		}else{
+			this.width = 0;
+			this.height = 0;
+		}
+		
 		this.nodes = nodes;
-		this.width = nodes.length;
-		this.height = nodes[0].length;
 	}
 
 	@Override

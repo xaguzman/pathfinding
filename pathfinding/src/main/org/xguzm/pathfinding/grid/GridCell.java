@@ -18,17 +18,19 @@ public class GridCell implements NavigationGridGraphNode{
 	
 	public GridCell() {}
 	
-	public GridCell(int column, int row) {
-		this(column, row, true);
+	public GridCell(int x, int y) {
+		this(x, y, true);
 	}
 	
-	public GridCell(int column, int row, boolean isWalkable){
-		this.y = row;
-		this.x = column;
+	public GridCell(int x, int y, boolean isWalkable){
+		this.y = y;
+		this.x = x;
 		this.isWalkable = isWalkable;
 	}
 	
-	
+	public GridCell(boolean isWalkable){
+		this.isWalkable = isWalkable;
+	}	
 
 	@Override
 	public void setIndex(int index) {

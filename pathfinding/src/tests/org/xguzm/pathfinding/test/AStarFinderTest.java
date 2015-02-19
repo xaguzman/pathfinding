@@ -28,6 +28,7 @@ public class AStarFinderTest {
 	
 	@Test
 	public void testMovementPath() {
+		System.out.println("Running AStarFinderTest.testMovementPath");
 		GridCell start = grid.getCell(2, 0), end = grid.getCell(4, 7);
 		
 		//test orthogonal movement only
@@ -38,14 +39,14 @@ public class AStarFinderTest {
 		
 		ManhattanDistance heuristic = new ManhattanDistance();
 		
-		System.out.println("No diagonal movement allowed: ");
+		System.out.println("\tPath: no diagonal movement allowed ");
 		for(int i = 1; i < path.size(); i++){
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
 			
-			System.out.println("Path1: (" + (i) + ") " + current);
+			System.out.println("\t  Path1: (" + (i) + ") " + current);
 			
-			//the distance should not be greater than one, otherwise, a diagonal movement occured
+			//the distance should not be different than one, otherwise, a diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
 			
 			assertTrue("Found diagonal movement during orthogonal-only movement test", dst == 1);
@@ -59,18 +60,35 @@ public class AStarFinderTest {
 		assertNotNull(String.format("No path found from %s to %s for diagnoal movement", start, end), path);
 		
 		int diagonalCount = 0;
-		System.out.println("\nDiagonal movement allowed: ");
+		System.out.println("\n\tDiagonal movement allowed: ");
 		for(int i = 1; i < path.size(); i++){
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
 			
 			//the distance should be greater than one, otherwise, no diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
-			System.out.println("Path2: (" + (i) + ") " + current);
+			System.out.println("\t  Path2: (" + (i) + ") " + current);
 			
 			if (dst > 1) diagonalCount++;
 		}
 		
 		assertTrue("No diagonal movement during diagonal movement test", diagonalCount > 0);
+	}
+	
+	@Test
+	public void autoAssignXYMapTest(){
+		System.out.println("Running AStarFinderTest.autoAssignXYMapTest");
+		NavigationGrid<GridCell> grid = NavGraphFactory.getAutoAssignedGridCellMap();
+		GridCell c = grid.getCell(3, 1);
+		
+		assertTrue("GridCell at Grid(3,2) didn't have it's x and y auto assigned correctly", c.x == 3 && c.y == 1);
+		
+		GridCell start = grid.getCell(2, 0), end = grid.getCell(4, 7);
+		
+		//test orthogonal movement only
+		opt.allowDiagonal = false;
+		
+		List<GridCell> path = finder.findPath(start,  end,  grid);
+		assertNotNull(String.format("No path found from %s to %s for orthogonal movement", start, end), path);
 	}
 }
