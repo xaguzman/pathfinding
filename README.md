@@ -11,8 +11,8 @@ some modifications were made.
 This library works with Libgdx's html5 backend, it was even used in my [#1GAM january entry](https://github.com/xaguzman/shiftingislands/ "Shifting Islands Source").
 
 Current versions: 
-	* 0.2.4
-	* 0.2.5-SNAPSHOT
+* 0.2.4
+* 0.2.5-SNAPSHOT
 
 __________
 
