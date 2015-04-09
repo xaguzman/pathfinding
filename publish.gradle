@@ -1,7 +1,7 @@
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-project.version = '0.2.5-SNAPSHOT' 
+project.version = '0.2.5'
 
 artifacts{
   archives jar, javadocJar, sourcesJar
