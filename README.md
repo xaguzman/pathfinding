@@ -11,8 +11,7 @@ some modifications were made.
 This library works with Libgdx's html5 backend, it was even used in my [#1GAM january entry](https://github.com/xaguzman/shiftingislands/ "Shifting Islands Source").
 
 Current versions: 
-* 0.2.4
-* 0.2.5-SNAPSHOT
+* 0.2.5
 
 __________
 
@@ -20,11 +19,11 @@ __________
 The library has been uploaded to sonatype oss repository.
 If you are using libgdx you can install it via graddle adding this dependency to your core project:
 
->	compile "com.github.xaguzman:pathfinding:0.2.4"
+>	compile "com.github.xaguzman:pathfinding:0.2.5"
 
 If you want to try the gdx-bridge, add another dependency to your project.
 
->	compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.4"
+>	compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.5"
 
 Right now there's no documentation for using the gdx-bridge. For a quick reference on how to use the gdx-bridge, please see this [test](https://github.com/xaguzman/pathfinding/blob/master/tests/src/main/org/xguzm/pathfinding/tests/MapLoadingTest.java "MapLoadingTest")
 
