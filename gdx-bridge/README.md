@@ -6,12 +6,17 @@ For simplicity, the gdx-bridge shares version with the pathfinding library.
 This extension provides quick creation of a [NavigationGrid](https://github.com/xaguzman/pathfinding/blob/master/pathfinding/src/main/org/xguzm/pathfinding/grid/NavigationGrid.java).
 by doing some small configurations to your tmx files.
 
+
 __________
 
 ## Installing
 Since you are using libgdx, you probably are using gradle. Just add it as a dependency to your core project.
 
 >   compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.5"
+
+If you are using libgdx < 1.5.0 you need to use version 0.2.4 instead
+
+>   compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.4"
 
 __________
 
