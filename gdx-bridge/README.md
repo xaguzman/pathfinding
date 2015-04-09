@@ -41,7 +41,7 @@ configuration values for the loader, all of them via constructors:
 if the `navigationProperty` is not present, this value is assumed. Default value is "0".
 *   handler: A libgdx `FileHandlerResolver` which will be used to load the tmx file. You should rarely need to use anything other than the default here (which is an InternalFileHandleResolver).
 
-* Be aware that the NavTmxMapLoader will automatically make your "navigation" layer invisible. *
+**Be aware that the NavTmxMapLoader will automatically make your "navigation" layer invisible.**
 
 If you want further customization, you can always just override the NavTmxMapLoader, or create your own :).
 
