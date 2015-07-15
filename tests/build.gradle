@@ -1,6 +1,0 @@
-sourceCompatibility = 1.6
-sourceSets.main.java.srcDirs = [ "src/main/" ]
-
-eclipse.project {
-    name = projectGroup + "-tests"
-}

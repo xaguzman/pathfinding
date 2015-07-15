@@ -1,6 +1,11 @@
 package org.xguzm.pathfinding.grid;
 
+import org.xguzm.pathfinding.NavigationGraph;
 import org.xguzm.pathfinding.NavigationNode;
+import org.xguzm.pathfinding.PathFinder;
+import org.xguzm.pathfinding.util.ObjectIntMap;
+
+import java.util.List;
 
 
 public class GridCell implements NavigationGridGraphNode{
@@ -10,39 +15,41 @@ public class GridCell implements NavigationGridGraphNode{
 	/* for path finders*/
 	private float f, g, h;
 	private boolean isWalkable;
-	private int closedOnJob, openedOnJob;
 	private GridCell parent;
-	
+	private ObjectIntMap<Class<? extends PathFinder>> closedOnJob = new ObjectIntMap<Class<? extends PathFinder>>();
+	private ObjectIntMap<Class<? extends PathFinder>> openedOnJob = new ObjectIntMap<Class<? extends PathFinder>>();
+
 	//for BTree
 	private int index;
-	
+
+
 	public GridCell() {}
-	
+
 	public GridCell(int x, int y) {
 		this(x, y, true);
 	}
-	
+
 	public GridCell(int x, int y, boolean isWalkable){
 		this.y = y;
 		this.x = x;
 		this.isWalkable = isWalkable;
 	}
-	
+
 	public GridCell(boolean isWalkable){
 		this.isWalkable = isWalkable;
-	}	
+	}
 
 	@Override
 	public void setIndex(int index) {
-		this.index = index;		
+		this.index = index;
 	}
 
-	
+
 	@Override
 	public int getIndex() {
 		return index;
 	}
-	
+
 	public boolean isWalkable() {
 		return isWalkable;
 	}
@@ -91,22 +98,42 @@ public class GridCell implements NavigationGridGraphNode{
 
 	@Override
 	public int getClosedOnJob() {
-		return closedOnJob;
+		return getClosedOnJob(DummyFinder.class);
 	}
 
 	@Override
 	public void setClosedOnJob(int closedOnJob) {
-		this.closedOnJob = closedOnJob;
+		setClosedOnJob(closedOnJob, DummyFinder.class);
 	}
 
 	@Override
 	public int getOpenedOnJob() {
-		return openedOnJob;
+		return getOpenedOnJob(DummyFinder.class) ;
 	}
 
 	@Override
 	public void setOpenedOnJob(int openedOnJob) {
-		this.openedOnJob = openedOnJob;
+		setOpenedOnJob(openedOnJob, DummyFinder.class);
+	}
+
+	@Override
+	public int getClosedOnJob(Class<? extends PathFinder> clazz) {
+		return closedOnJob.get(clazz, 0);
+	}
+
+	@Override
+	public void setClosedOnJob(int closedOnJob, Class<? extends PathFinder> clazz) {
+		this.closedOnJob.put(clazz, closedOnJob);
+	}
+
+	@Override
+	public int getOpenedOnJob(Class<? extends PathFinder> clazz) {
+		return openedOnJob.get(clazz, 0);
+	}
+
+	@Override
+	public void setOpenedOnJob(int openedOnJob, Class<? extends PathFinder> clazz) {
+		this.openedOnJob.put(clazz, openedOnJob);
 	}
 
 	@Override
@@ -132,6 +159,12 @@ public class GridCell implements NavigationGridGraphNode{
 	@Override
 	public void setY(int y) {
 		this.y = y;
-		
+	}
+
+	private static final class DummyFinder<T extends GridCell> implements PathFinder<T> {
+		@Override
+		public List<T> findPath(T startNode, T endNode, NavigationGraph<T> grid) {
+			return null;
+		}
 	}
 }

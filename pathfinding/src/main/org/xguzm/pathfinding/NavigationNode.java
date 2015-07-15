@@ -5,12 +5,18 @@ public interface NavigationNode extends BHeapNode{
 	/** The Node from which this node is reachable */
 	void setParent(NavigationNode parent);
 	NavigationNode getParent();
-	
+
 	int getClosedOnJob();
 	void setClosedOnJob(int job);
-	
+
 	int getOpenedOnJob();
 	void setOpenedOnJob(int job);
+
+	int getClosedOnJob(Class<? extends PathFinder> clazz);
+	void setClosedOnJob(int job, Class<? extends PathFinder> clazz);
+	
+	int getOpenedOnJob(Class<? extends PathFinder> clazz);
+	void setOpenedOnJob(int job, Class<? extends PathFinder> clazz);
 	
 	//f
 	float getF();

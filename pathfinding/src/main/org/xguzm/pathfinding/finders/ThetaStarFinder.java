@@ -63,13 +63,13 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	    openList.clear();
 	    openList.add(startNode);
 	    startNode.setParent(null);
-	    startNode.setOpenedOnJob( job );
+	    startNode.setOpenedOnJob( job, this.getClass() );
 	    
 	    while (openList.size > 0) {
 	    	
 	        // pop the position of node which has the minimum 'f' value.
 	        node = openList.pop();
-	        node.setClosedOnJob(job);
+	        node.setClosedOnJob(job, this.getClass());
 	        
 
 	        // if reached the end position, construct the path and return it
@@ -83,7 +83,7 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	        for (int i = 0, l = neighbors.size(); i < l; ++i) {
 	            neighbor = neighbors.get(i);
 
-	            if (neighbor.getClosedOnJob() == job || !graph.isWalkable(neighbor)) {
+	            if (neighbor.getClosedOnJob(this.getClass()) == job || !graph.isWalkable(neighbor)) {
 	                continue;
 	            }
 	            
@@ -100,7 +100,7 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	            }
 
 	            // check if the neighbor has not been inspected yet, or can be reached with smaller cost from the current node
-	            if (neighbor.getOpenedOnJob() != job || ng < neighbor.getG()) {
+	            if (neighbor.getOpenedOnJob(this.getClass()) != job || ng < neighbor.getG()) {
 	            	float prevf = neighbor.getF();
 	                neighbor.setG(ng);
 
@@ -108,9 +108,9 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	                neighbor.setF( neighbor.getG() + neighbor.getH());
 	                neighbor.setParent(parent);
 
-	                if (neighbor.getOpenedOnJob() != job) {
+	                if (neighbor.getOpenedOnJob(this.getClass()) != job) {
 	                    openList.add(neighbor);
-	                    neighbor.setOpenedOnJob(job);
+	                    neighbor.setOpenedOnJob(job, this.getClass());
 	                } else {
 	                    // the neighbor can be reached with smaller cost.
 	                    // Since its f value has been updated, we have to update its position in the open list

@@ -65,13 +65,13 @@ public class JumpPointFinder<T extends NavigationGridGraphNode> implements PathF
 		openList.clear();
 		openList.add(startNode);
 		startNode.setParent(null);
-		startNode.setOpenedOnJob(job);
+		startNode.setOpenedOnJob(job, this.getClass());
 
 		while (openList.size > 0) {
 
 			// pop the position of node which has the minimum 'f' value.
 			node = openList.pop();
-			node.setClosedOnJob(job);
+			node.setClosedOnJob(job, this.getClass());
 
 			// if reached the end position, construct the path and return it
 			if (node == endNode) {
@@ -103,7 +103,7 @@ public class JumpPointFinder<T extends NavigationGridGraphNode> implements PathF
 			// Try to find a node to jump to:
 			T jumpPoint = jump(neighbor, node, graph, start, end);
 
-			if (jumpPoint == null || jumpPoint.getClosedOnJob() == job)
+			if (jumpPoint == null || jumpPoint.getClosedOnJob(this.getClass()) == job)
 				continue;
 
 			boolean isDiagonalJump = (jumpPoint.getX() != node.getX())
@@ -116,16 +116,16 @@ public class JumpPointFinder<T extends NavigationGridGraphNode> implements PathF
 			float distance = euclideanDist.calculate(jumpPoint, node);
 			float ng = node.getG() + distance;
 
-			if (jumpPoint.getOpenedOnJob() != job || ng < neighbor.getG()) {
+			if (jumpPoint.getOpenedOnJob(this.getClass()) != job || ng < neighbor.getG()) {
 				float prevf = jumpPoint.getF();
 				jumpPoint.setG(ng);
 				jumpPoint.setH(options.heuristic.calculate(jumpPoint, end));
 				jumpPoint.setF(neighbor.getG() + neighbor.getH());
 				jumpPoint.setParent(node);
 
-				if (jumpPoint.getOpenedOnJob() != job) {
+				if (jumpPoint.getOpenedOnJob(this.getClass()) != job) {
 					openList.add(jumpPoint);
-					jumpPoint.setOpenedOnJob(job);
+					jumpPoint.setOpenedOnJob(job, this.getClass());
 				} else {
 					// the neighbor can be reached with smaller cost.
 					// Since its f value has been updated, we have to update its

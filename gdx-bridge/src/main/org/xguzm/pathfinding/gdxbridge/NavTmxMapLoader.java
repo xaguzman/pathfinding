@@ -20,6 +20,10 @@ public class NavTmxMapLoader extends TmxMapLoader {
 	public NavTmxMapLoader(){
 		this("navigation", "walkable", "0");
 	}
+
+	public NavTmxMapLoader(FileHandleResolver resolver){
+		this(resolver, "navigation", "walkable", "0");
+	}
 	
 	public NavTmxMapLoader(String navigationLayerName, String navigationProperty, String navigationClosedValue) {
 		this(new InternalFileHandleResolver(), navigationLayerName, navigationProperty, navigationClosedValue);

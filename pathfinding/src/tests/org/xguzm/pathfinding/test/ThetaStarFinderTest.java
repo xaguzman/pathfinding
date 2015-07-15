@@ -26,6 +26,7 @@ public class ThetaStarFinderTest {
 	
 	@Test
 	public void basicMovementTest() {
+		System.out.println("\nRunning ThetaStarFinderTest.basicMovementTest");
 		GridCell start = grid.getCell(2, 0), end = grid.getCell(4, 7);
 		
 		//test orthogonal movement only
@@ -36,8 +37,9 @@ public class ThetaStarFinderTest {
 				
 		//TODO: smarter test...how to make sure path is smooth?
 		int i =0 ;
+		System.out.println("  Path: no diagonal movement allowed ");
 		for(GridCell cell : path){
-			System.out.println("Path1: (" + (i++) + ") " + cell);
+			System.out.println("    (" + (i++) + ") " + cell);
 		}
 		
 		//test diagonal movement 
@@ -48,8 +50,9 @@ public class ThetaStarFinderTest {
 		
 		//TODO: smarter test...how to make sure path is smooth?
 		i =0 ;
+		System.out.println("  Diagonal movement allowed ");
 		for(GridCell cell : path){
-			System.out.println("Path2: (" + (i++) + ") " + cell);
+			System.out.println("    (" + (i++) + ") " + cell);
 		}
 	}
 

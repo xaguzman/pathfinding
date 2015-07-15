@@ -28,7 +28,7 @@ public class AStarFinderTest {
 	
 	@Test
 	public void testMovementPath() {
-		System.out.println("Running AStarFinderTest.testMovementPath");
+		System.out.println("\nRunning AStarFinderTest.testMovementPath");
 		GridCell start = grid.getCell(2, 0), end = grid.getCell(4, 7);
 		
 		//test orthogonal movement only
@@ -39,12 +39,12 @@ public class AStarFinderTest {
 		
 		ManhattanDistance heuristic = new ManhattanDistance();
 		
-		System.out.println("\tPath: no diagonal movement allowed ");
+		System.out.println("  Path: no diagonal movement allowed ");
 		for(int i = 1; i < path.size(); i++){
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
 			
-			System.out.println("\t  Path1: (" + (i) + ") " + current);
+			System.out.println("    Path1: (" + (i) + ") " + current);
 			
 			//the distance should not be different than one, otherwise, a diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
@@ -60,14 +60,14 @@ public class AStarFinderTest {
 		assertNotNull(String.format("No path found from %s to %s for diagnoal movement", start, end), path);
 		
 		int diagonalCount = 0;
-		System.out.println("\n\tDiagonal movement allowed: ");
+		System.out.println("\n  Diagonal movement allowed: ");
 		for(int i = 1; i < path.size(); i++){
 			GridCell current = path.get(i);
 			GridCell prev = path.get(i-1);
 			
 			//the distance should be greater than one, otherwise, no diagonal movement occured
 			float dst = heuristic.calculate(current, prev);
-			System.out.println("\t  Path2: (" + (i) + ") " + current);
+			System.out.println("    Path2: (" + (i) + ") " + current);
 			
 			if (dst > 1) diagonalCount++;
 		}
@@ -77,7 +77,7 @@ public class AStarFinderTest {
 	
 	@Test
 	public void autoAssignXYMapTest(){
-		System.out.println("Running AStarFinderTest.autoAssignXYMapTest");
+		System.out.println("\nRunning AStarFinderTest.autoAssignXYMapTest");
 		NavigationGrid<GridCell> grid = NavGraphFactory.getAutoAssignedGridCellMap();
 		GridCell c = grid.getCell(3, 1);
 		
