@@ -3,7 +3,7 @@ sourceSets.main.java.srcDirs = [ "src/main/" ]
 
 sourceSets.test.java.srcDirs = [ "src/tests/" ]
 sourceSets.test.resources.srcDirs = [ "src/tests/resources" ]
-sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
+//sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
 
 project.archivesBaseName  = 'pathfinding-gdx-bridge'
 

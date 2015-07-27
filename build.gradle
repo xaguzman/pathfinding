@@ -67,7 +67,9 @@ project(':gdx-bridge'){
   dependencies {
     compile project(":pathfinding")
    	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+
     testCompile "junit:junit:4.10"
+    testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
     testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
   }
