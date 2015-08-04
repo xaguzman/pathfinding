@@ -73,7 +73,7 @@ public class NavigationGrid<T extends NavigationGridGraphNode> implements Naviga
 	@Override
 	public T getCell(int x, int y) {
 	    return this.contains(x, y)  ? this.nodes[x][y] : null; 
-	};
+	}
 	
 	@Override
 	public void setCell(int x, int y, T cell){

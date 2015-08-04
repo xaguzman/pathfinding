@@ -52,6 +52,9 @@ public class JumpPointFinder<T extends NavigationGridGraphNode> implements PathF
 
 	@Override
 	public List<T> findPath(T startNode, T endNode, NavigationGraph<T> grid) {
+		Util.validateNotNull(startNode, "Start node cannot be null");
+		Util.validateNotNull(endNode, "End node cannot be null");
+
 		if (jobId == Integer.MAX_VALUE)
 			jobId = 0;
 		int job = ++jobId;

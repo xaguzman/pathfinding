@@ -1,5 +1,7 @@
 package org.xguzm.pathfinding;
 
+import org.xguzm.pathfinding.util.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,5 +20,11 @@ public class Util {
 		}
 		path.remove(0);
 		return (List<T>)path;
+	}
+
+	public static void validateNotNull(NavigationNode node, String msg){
+		if (node == null){
+			throw new PathFindingException(msg, new NullPointerException());
+		}
 	}
 }

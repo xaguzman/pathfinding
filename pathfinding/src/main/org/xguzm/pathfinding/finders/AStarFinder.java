@@ -45,6 +45,10 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	}
 	
 	public List<T> findPath(T startNode, T endNode, NavigationGraph<T> graph) {
+
+		Util.validateNotNull(startNode, "Start node cannot be null");
+		Util.validateNotNull(endNode, "End node cannot be null");
+
 		if (jobId == Integer.MAX_VALUE)
 			jobId = 0;
 		int job = ++jobId;
@@ -52,7 +56,7 @@ public class AStarFinder<T extends NavigationNode> implements PathFinder<T>{
 	    T node, neighbor;
         List<T> neighbors = new ArrayList<T>();
         float ng;
-        
+
 	    startNode.setG(0);
 	    startNode.setF(0);
 

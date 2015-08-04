@@ -48,6 +48,10 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 		
 	@SuppressWarnings("unchecked")
 	public List<T> findPath(T startNode, T endNode, NavigationGraph<T> graph) {
+
+		Util.validateNotNull(startNode, "Start node cannot be null");
+		Util.validateNotNull(endNode, "End node cannot be null");
+
 		if (jobId == Integer.MAX_VALUE)
 			jobId = 0;
 		int job = ++jobId;
@@ -55,6 +59,10 @@ public abstract class ThetaStarFinder<T extends NavigationNode> implements PathF
 	    T node, neighbor;
         List<T> neighbors = new ArrayList<T>();
         float ng;
+
+		Util.validateNotNull(startNode, "Start node cannot be null");
+		Util.validateNotNull(endNode, "End node cannot be null");
+
         
 	    startNode.setG(0);
 	    startNode.setF(0);
