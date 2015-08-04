@@ -17,14 +17,15 @@ allprojects{
     mavenLocal()
   }
 
-  /** needed to disable Java 8 doclint which throws errors **/
-  tasks.withType(Javadoc) {
-    options.addStringOption('Xdoclint:none', '-quiet')
-  }
+  // /** needed to disable Java 8 doclint which throws errors **/
+  // tasks.withType(Javadoc) {
+  //   options.addStringOption('Xdoclint:none', '-quiet')
+  // }
 }
 
 ext{
   projectGroup = 'pathfinding'
+  projectVersion = '0.2.6'
   gdxVersion = '1.5.0'
   distDir = file('dist/')   
 }
@@ -49,21 +50,17 @@ subprojects{
   }
 
   buildDir = rootProject.buildDir
-
-
 }
 
 project(':pathfinding'){
-  apply from : '../publish.gradle'
-
+  
   dependencies {
     testCompile 'junit:junit:4.10'
   }
 }
 
 project(':gdx-bridge'){
-  apply from : '../publish.gradle'
-
+  
   dependencies {
     compile project(":pathfinding")
    	compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -73,22 +70,6 @@ project(':gdx-bridge'){
     testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
   }
-}
-
-project(':tests'){
-	dependencies {
-      compile project(":pathfinding")
-      compile project(":gdx-bridge")
-      compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-      compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
-      compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-  	}
-}
-
-
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
 }
 
 tasks.eclipse.doLast {

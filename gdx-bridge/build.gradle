@@ -1,3 +1,6 @@
+
+
+
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/main/" ]
 
@@ -10,3 +13,119 @@ project.archivesBaseName  = 'pathfinding-gdx-bridge'
 eclipse.project {
     name = projectGroup + "-gdx-bridge"
 }
+
+
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+artifacts{
+  archives jar, javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name          'Path finding gdx-bridge'
+        description   'A bridge for the pathfinding for automatic integration with libgdx tiled maps'
+        version       project.projectVersion
+        groupId       'com.github.xaguzman'
+
+        packaging 'jar'
+        url 'https://github.com/xaguzman/pathfinding/tree/master/gdx-bridge'
+
+        scm {
+          connection 'scm:git:git://github.com/xaguzman/pathfinding.git'
+          developerConnection 'scm:git:git@github.com:xaguzman/pathfinding.git'
+          url 'http://github.com/xaguzman/pathfinding'
+        }
+
+        licenses {
+          license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'xaguzman'
+            name 'Xavier Guzman'
+            email 'xaguzman@gmail.com'
+            timezone 'CST  (GMT-6)'
+          }
+        }
+      }
+    }
+  }
+}
+
+// apply plugin: 'maven-publish'
+// publishing {
+//     repositories{
+//       // maven {
+//         // url '../build/repo'
+//       // }
+//       maven{
+//           if(project.projectVersion.endsWith('-SNAPSHOT')) {
+//             url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+//           } else {
+//             url 'https://oss.sonatype.org/content/repositories/snapshots/'
+//           }
+          
+//           credentials {
+//             username ossrhUsername
+//             password ossrhPassword
+//           }
+//       }
+//     }
+    
+//     publications {
+// 	    gdxBridge(MavenPublication){
+// 		    from components.java
+// 		    artifacts = [sourcesJar, javadocJar]
+
+// 		    artifactId 'gdx-bridge'
+// 		    groupId 'com.github.xaguzman'
+// 		    version projectVersion
+            
+//             pom.withXml {
+//                 def root = asNode()
+//                 root.appendNode('description', 'A bridge for the pathfinding for automatic integration with libgdx tiled maps')
+//                 root.appendNode('url', 'https://github.com/xaguzman/pathfinding/tree/master/gdx-bridge')           
+                
+//                 def license = root.appendNode('licenses').appendNode('license')
+//                 license.appendNode('name', 'The Apache Software License, Version 2.0')
+//                 license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
+                
+//                 def dev = root.appendNode('developers').appendNode('developer')
+//                 dev.appendNode('id', 'xaguzman')
+//                 dev.appendNode('name', 'Xavier Guzman')
+//                 dev.appendNode('email', 'xaguzman@gmail.com')
+//                 dev.appendNode('timezone', 'CST (GMT-6)')
+
+//                 def scm = root.appendNode('scm')
+//                 scm.appendNode('connection', 'scm:git:git://github.com/xaguzman/pathfinding.git')
+//                 scm.appendNode('developerConnection', 'scm:git:git://github.com/xaguzman/pathfinding.git')
+//                 scm.appendNode('url', 'http://github.com/xaguzman/pathfinding')
+//             }
+// 	    }
+//   	}
+
+//   }
+

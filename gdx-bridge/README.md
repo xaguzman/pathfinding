@@ -12,7 +12,7 @@ __________
 ## Installing
 Since you are using libgdx, you probably are using gradle. Just add it as a dependency to your core project.
 
->   compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.5"
+>   compile "com.github.xaguzman:pathfinding-gdx-bridge:0.2.6"
 
 If you are using libgdx < 1.5.0 you need to use version 0.2.4 instead
 

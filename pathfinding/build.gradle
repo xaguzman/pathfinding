@@ -1,3 +1,5 @@
+
+
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/main/" ]
 sourceSets.test.java.srcDirs = [ "src/tests/" ]
@@ -5,3 +7,128 @@ sourceSets.test.java.srcDirs = [ "src/tests/" ]
 eclipse.project {
     name = projectGroup + "-core"
 }
+
+
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+artifacts{
+  archives jar, javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name          'Path Finding'
+        description   'A generic java path finding library, meant to be used in games'
+        version       project.projectVersion
+        groupId       'com.github.xaguzman'
+
+        packaging 'jar'
+        url 'https://github.com/xaguzman/pathfinding'
+
+        scm {
+          connection 'scm:git:git://github.com/xaguzman/pathfinding.git'
+          developerConnection 'scm:git:git@github.com:xaguzman/pathfinding.git'
+          url 'http://github.com/xaguzman/pathfinding'
+        }
+
+        licenses {
+          license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'xaguzman'
+            name 'Xavier Guzman'
+            email 'xaguzman@gmail.com'
+            timezone 'CST  (GMT-6)'
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// apply plugin: 'maven-publish'
+
+// NOTE: requires you to first setup
+// 1) ~/.gnupg/* with a PGP key to sign the artifacts
+// 2) ~/.gradle/gradle.properties defining
+//
+//    signing.keyId=<YOUR PGP KEY ID>
+//    signing.password=<PASSWORD TO PGP SECRET RING>
+//    signing.secretKeyRingFile=<FULLPATH TO PGP SECRET RING>
+//    ossrhUsername=<OSS Sonatype Username>
+//    ossrhPassword=<OSS Sonatype Password>
+// publishing {
+// 	repositories{
+//       // maven {
+//         // url '../build/repo'
+//       // }
+//       maven{
+//       	  if(project.projectVersion.endsWith('-SNAPSHOT')) {
+//             url 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+//           } else {
+//             url 'https://oss.sonatype.org/content/repositories/snapshots/'
+//           }
+          
+//           credentials {
+//             username ossrhUsername
+//             password ossrhPassword
+//           }
+//       }
+//     }
+// 	publications {
+//     	pathfinding(MavenPublication) {
+// 	      	from components.java
+// 	      	artifacts = [sourcesJar, javadocJar]
+
+// 	      	artifactId 'pathfinding'
+// 	      	groupId 'com.github.xaguzman'
+// 	      	version projectVersion
+	      	
+// 	      	pom.withXml {
+// 	      		def root = asNode()
+// 	        	root.appendNode('description', 'A generic java path finding library, meant to be used in games')
+// 	        	root.appendNode('url', 'https://github.com/xaguzman/pathfinding')        	
+	        	
+// 	        	def license = root.appendNode('licenses').appendNode('license')
+// 	        	license.appendNode('name', 'The Apache Software License, Version 2.0')
+// 	        	license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
+	        	
+// 	        	def dev = root.appendNode('developers').appendNode('developer')
+// 	        	dev.appendNode('id', 'xaguzman')
+// 	        	dev.appendNode('name', 'Xavier Guzman')
+// 	        	dev.appendNode('email', 'xaguzman@gmail.com')
+// 	        	dev.appendNode('timezone', 'CST (GMT-6)')
+
+// 	        	def scm = root.appendNode('scm')
+// 	        	scm.appendNode('connection', 'scm:git:git://github.com/xaguzman/pathfinding.git')
+// 	        	scm.appendNode('developerConnection', 'scm:git:git://github.com/xaguzman/pathfinding.git')
+// 	        	scm.appendNode('url', 'http://github.com/xaguzman/pathfinding')
+// 	      	}
+//     	}
+// 	}
+// }
+
