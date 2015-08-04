@@ -19,7 +19,7 @@ __________
 The library has been uploaded to sonatype oss repository.
 If you are using libgdx you can install it via graddle adding this dependency to your core project:
 
->	compile "com.github.xaguzman:pathfinding:0.2.5"
+>	compile "com.github.xaguzman:pathfinding:0.2.6"
 
 There's also the [gdx-bridge](https://github.com/xaguzman/pathfinding/tree/master/gdx-bridge) extension to easily get pathfinding features
 in your game directly from your tmx maps.
