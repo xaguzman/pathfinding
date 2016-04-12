@@ -4,8 +4,10 @@ sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/main/" ]
 sourceSets.test.java.srcDirs = [ "src/tests/" ]
 
+project.archivesBaseName  = 'pathfinding'
+
 eclipse.project {
-    name = projectGroup + "-core"
+    name = project.archivesBaseName
 }
 
 
@@ -38,7 +40,8 @@ uploadArchives {
         name          'Path Finding'
         description   'A generic java path finding library, meant to be used in games'
         version       project.projectVersion
-        groupId       'com.github.xaguzman'
+        groupId       project.projectGroupId
+        artifactId    project.archivesBaseName
 
         packaging 'jar'
         url 'https://github.com/xaguzman/pathfinding'
@@ -68,6 +71,7 @@ uploadArchives {
     }
   }
 }
+
 
 
 // apply plugin: 'maven-publish'
@@ -132,3 +136,7 @@ uploadArchives {
 // 	}
 // }
 
+task testPom << {
+  uploadArchives.repositories.mavenDeployer.pom.writeTo("$buildDir/pathfinding.pom.xml")
+  print('created $buildDir/pathfinding.pom.xml')
+}

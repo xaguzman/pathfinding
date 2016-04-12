@@ -1,6 +1,4 @@
 
-
-
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/main/" ]
 
@@ -11,7 +9,7 @@ sourceSets.test.resources.srcDirs = [ "src/tests/resources" ]
 project.archivesBaseName  = 'pathfinding-gdx-bridge'
 
 eclipse.project {
-    name = projectGroup + "-gdx-bridge"
+    name = project.archivesBaseName
 }
 
 
@@ -26,6 +24,8 @@ artifacts{
 signing {
     sign configurations.archives
 }
+
+
 
 uploadArchives {
   repositories {
@@ -44,7 +44,8 @@ uploadArchives {
         name          'Path finding gdx-bridge'
         description   'A bridge for the pathfinding for automatic integration with libgdx tiled maps'
         version       project.projectVersion
-        groupId       'com.github.xaguzman'
+        groupId       project.projectGroupId
+        artifactId    project.archivesBaseName
 
         packaging 'jar'
         url 'https://github.com/xaguzman/pathfinding/tree/master/gdx-bridge'
@@ -68,6 +69,15 @@ uploadArchives {
             name 'Xavier Guzman'
             email 'xaguzman@gmail.com'
             timezone 'CST  (GMT-6)'
+          }
+        }
+
+        dependencies {
+          dependency {
+            groupId project.projectGroupId
+            artifactId 'pathfinding'
+            version project.projectVersion
+            scope 'compile'
           }
         }
       }
@@ -129,3 +139,16 @@ uploadArchives {
 
 //   }
 
+task testPom << {
+  uploadArchives.repositories.mavenDeployer.pom.writeTo("$buildDir/gdx-bridge.pom.xml")
+  print('created $buildDir/gdx-bridge.pom.xml')
+}
+
+def installer = install.repositories.mavenInstaller
+def deployer = uploadArchives.repositories.mavenDeployer
+
+[installer, deployer]*.pom*.whenConfigured {pom ->
+    //hacky way to fix the dependency on the core library...
+    pom.dependencies = pom.dependencies.findAll { dep -> dep.groupId != 'pathfinding' && dep.version !='unspecified' }
+    print(pom.dependencies)
+}

@@ -17,15 +17,16 @@ allprojects{
     mavenLocal()
   }
 
-  // /** needed to disable Java 8 doclint which throws errors **/
-  // tasks.withType(Javadoc) {
-  //   options.addStringOption('Xdoclint:none', '-quiet')
-  // }
+   /** needed to disable Java 8 doclint which throws errors **/
+   tasks.withType(Javadoc) {
+     options.addStringOption('Xdoclint:none', '-quiet')
+   }
 }
 
-ext{
-  projectGroup = 'pathfinding'
+ext {
+  //projectGroup = 'pathfinding'
   projectVersion = '0.2.6'
+  projectGroupId = 'com.github.xaguzman'
   gdxVersion = '1.5.0'
   distDir = file('dist/')   
 }
