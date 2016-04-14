@@ -5,7 +5,6 @@ sourceSets.main.java.srcDirs = [ "src/main/" ]
 sourceSets.test.java.srcDirs = [ "src/tests/" ]
 sourceSets.test.resources.srcDirs = [ "src/tests/resources" ]
 
-
 project.archivesBaseName  = 'pathfinding-gdx-bridge'
 
 eclipse.project {
@@ -13,18 +12,24 @@ eclipse.project {
 }
 
 
+if (!hasProperty('ossrhUsername')) {
+  ossrhUsername = 'n/a'
+}
+
+if ( !hasProperty('ossrhPassword')){
+  ossrhPassword = "n/a"
+}
 
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-artifacts{
+artifacts {
   archives jar, javadocJar, sourcesJar
 }
 
 signing {
-    sign configurations.archives
+  sign configurations.archives
 }
-
 
 uploadArchives {
   repositories {
@@ -40,11 +45,11 @@ uploadArchives {
       }
 
       pom.project {
-        name          'Path finding gdx-bridge'
-        description   'A bridge for the pathfinding for automatic integration with libgdx tiled maps'
-        version       project.projectVersion
-        groupId       project.projectGroupId
-        artifactId    project.archivesBaseName
+        name 'Path finding gdx-bridge'
+        description 'A bridge for the pathfinding for automatic integration with libgdx tiled maps'
+        version project.projectVersion
+        groupId project.projectGroupId
+        artifactId project.archivesBaseName
 
         packaging 'jar'
         url 'https://github.com/xaguzman/pathfinding/tree/master/gdx-bridge'
@@ -96,14 +101,14 @@ uploadArchives {
 //           } else {
 //             url 'https://oss.sonatype.org/content/repositories/snapshots/'
 //           }
-          
+
 //           credentials {
 //             username ossrhUsername
 //             password ossrhPassword
 //           }
 //       }
 //     }
-    
+
 //     publications {
 // 	    gdxBridge(MavenPublication){
 // 		    from components.java
@@ -112,16 +117,16 @@ uploadArchives {
 // 		    artifactId 'gdx-bridge'
 // 		    groupId 'com.github.xaguzman'
 // 		    version projectVersion
-            
+
 //             pom.withXml {
 //                 def root = asNode()
 //                 root.appendNode('description', 'A bridge for the pathfinding for automatic integration with libgdx tiled maps')
 //                 root.appendNode('url', 'https://github.com/xaguzman/pathfinding/tree/master/gdx-bridge')           
-                
+
 //                 def license = root.appendNode('licenses').appendNode('license')
 //                 license.appendNode('name', 'The Apache Software License, Version 2.0')
 //                 license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
-                
+
 //                 def dev = root.appendNode('developers').appendNode('developer')
 //                 dev.appendNode('id', 'xaguzman')
 //                 dev.appendNode('name', 'Xavier Guzman')
@@ -146,8 +151,8 @@ task testPom << {
 def installer = install.repositories.mavenInstaller
 def deployer = uploadArchives.repositories.mavenDeployer
 
-[installer, deployer]*.pom*.whenConfigured {pom ->
-    //hacky way to fix the dependency on the core library...
-    pom.dependencies = pom.dependencies.findAll { dep -> dep.groupId != 'pathfinding' && dep.version !='unspecified' }
-    print(pom.dependencies)
+[installer, deployer]*.pom*.whenConfigured { pom ->
+  //hacky way to fix the dependency on the core library...
+  pom.dependencies = pom.dependencies.findAll { dep -> dep.groupId != 'pathfinding' && dep.version != 'unspecified' }
+  print(pom.dependencies)
 }

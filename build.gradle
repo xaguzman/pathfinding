@@ -17,10 +17,10 @@ allprojects{
     mavenLocal()
   }
 
-   /** needed to disable Java 8 doclint which throws errors **/
-   tasks.withType(Javadoc) {
-     options.addStringOption('Xdoclint:none', '-quiet')
-   }
+//   /** needed to disable Java 8 doclint which throws errors **/
+//   tasks.withType(Javadoc) {
+//     options.addStringOption('Xdoclint:none', '-quiet')
+//   }
 }
 
 ext {
@@ -71,10 +71,6 @@ project(':gdx-bridge'){
     testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
   }
 }
-
-// for travis
-ossrhUsername = hasProperty(ossrhUsername) ? ossrhUsername : ''
-ossrhPassword = hasProperty(ossrhPassword) ? ossrhPassword : ''
 
 tasks.eclipse.doLast {
     delete ".project"

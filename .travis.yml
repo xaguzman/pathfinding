@@ -8,3 +8,8 @@ cache:
 jdk:
   - oraclejdk8
   - oraclejdk7
+
+install: /bin/true
+script:
+  - ./gradlew pathfinding:check
+  - ./gradlew gdx-bridge:check

@@ -23,6 +23,14 @@ signing {
     sign configurations.archives
 }
 
+if (!hasProperty('ossrhUsername')) {
+  ossrhUsername = 'n/a'
+}
+
+if ( !hasProperty('ossrhPassword')){
+  ossrhPassword = "n/a"
+}
+
 uploadArchives {
   repositories {
     mavenDeployer {
@@ -37,11 +45,11 @@ uploadArchives {
       }
 
       pom.project {
-        name          'Path Finding'
-        description   'A generic java path finding library, meant to be used in games'
-        version       project.projectVersion
-        groupId       project.projectGroupId
-        artifactId    project.archivesBaseName
+        name 'Path Finding'
+        description 'A generic java path finding library, meant to be used in games'
+        version project.projectVersion
+        groupId project.projectGroupId
+        artifactId project.archivesBaseName
 
         packaging 'jar'
         url 'https://github.com/xaguzman/pathfinding'
@@ -72,8 +80,6 @@ uploadArchives {
   }
 }
 
-
-
 // apply plugin: 'maven-publish'
 
 // NOTE: requires you to first setup
@@ -96,7 +102,7 @@ uploadArchives {
 //           } else {
 //             url 'https://oss.sonatype.org/content/repositories/snapshots/'
 //           }
-          
+
 //           credentials {
 //             username ossrhUsername
 //             password ossrhPassword
@@ -111,16 +117,16 @@ uploadArchives {
 // 	      	artifactId 'pathfinding'
 // 	      	groupId 'com.github.xaguzman'
 // 	      	version projectVersion
-	      	
+
 // 	      	pom.withXml {
 // 	      		def root = asNode()
 // 	        	root.appendNode('description', 'A generic java path finding library, meant to be used in games')
 // 	        	root.appendNode('url', 'https://github.com/xaguzman/pathfinding')        	
-	        	
+
 // 	        	def license = root.appendNode('licenses').appendNode('license')
 // 	        	license.appendNode('name', 'The Apache Software License, Version 2.0')
 // 	        	license.appendNode('url', 'http://www.apache.org/licenses/LICENSE-2.0.txt')
-	        	
+
 // 	        	def dev = root.appendNode('developers').appendNode('developer')
 // 	        	dev.appendNode('id', 'xaguzman')
 // 	        	dev.appendNode('name', 'Xavier Guzman')
@@ -140,3 +146,4 @@ task testPom << {
   uploadArchives.repositories.mavenDeployer.pom.writeTo("$buildDir/pathfinding.pom.xml")
   print('created $buildDir/pathfinding.pom.xml')
 }
+
