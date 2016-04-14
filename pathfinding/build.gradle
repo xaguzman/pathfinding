@@ -23,14 +23,6 @@ signing {
     sign configurations.archives
 }
 
-if (!hasProperty('ossrhUsername')) {
-  ossrhUsername = 'n/a'
-}
-
-if ( !hasProperty('ossrhPassword')){
-  ossrhPassword = "n/a"
-}
-
 uploadArchives {
   repositories {
     mavenDeployer {

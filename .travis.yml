@@ -6,10 +6,10 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 jdk:
-  - oraclejdk8
   - oraclejdk7
+  - oraclejdk8
 
 install: /bin/true
 script:
-  - ./gradlew pathfinding:check
-  - ./gradlew gdx-bridge:check
+  - ./gradlew pathfinding:check -PossrhUsername -PossrhPassword
+  - ./gradlew gdx-bridge:check -PossrhUsername -PossrhPassword

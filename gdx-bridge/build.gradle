@@ -12,14 +12,6 @@ eclipse.project {
 }
 
 
-if (!hasProperty('ossrhUsername')) {
-  ossrhUsername = 'n/a'
-}
-
-if ( !hasProperty('ossrhPassword')){
-  ossrhPassword = "n/a"
-}
-
 apply plugin: 'maven'
 apply plugin: 'signing'
 
