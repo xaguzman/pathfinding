@@ -24,7 +24,6 @@ allprojects{
 }
 
 ext {
-  //projectGroup = 'pathfinding'
   projectVersion = '0.2.6'
   projectGroupId = 'com.github.xaguzman'
   gdxVersion = '1.5.0'
@@ -72,6 +71,10 @@ project(':gdx-bridge'){
     testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
   }
 }
+
+// for travis
+ossrhUsername = hasProperty(ossrhUsername) ? ossrhUsername : ''
+ossrhPassword = hasProperty(ossrhPassword) ? ossrhPassword : ''
 
 tasks.eclipse.doLast {
     delete ".project"
