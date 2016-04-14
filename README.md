@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/xaguzman/pathfinding.svg?branch=master)](https://travis-ci.org/xaguzman/pathfinding)
+
 pathfinding - APACHE LICENSE 2.0
 ==========
 
