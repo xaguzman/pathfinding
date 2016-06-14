@@ -53,11 +53,12 @@ If you want further customization, you can always just override the NavTmxMapLoa
 ## Example
 
 Assuming you are going to use the default settings, this is what you need to do:
-Add a custom property to any tiles in any of your tilesets that you want to make walkable called "walkable", set their value to whatever you want, except for "0" (even empty will work).
-Add a layer named "navigation" to your tmx map. In this layer, you should add all your tiles with "walkable" property.
-Save your map.
 
-Load your NavigationGrid data:
+* Add a custom property to any tiles in any of your tilesets that you want to make walkable called "walkable", set their value to whatever you want, except for "0" (even empty will work).
+* Add a layer named "navigation" to your tmx map. In this layer, you should add all your tiles with "walkable" property.
+* Save your map.
+* Load your NavigationGrid data:
+
 ```java
 TiledMap map = new NavTmxMapLoader().load("your/tmx/file.tmx");
 NavigationTiledMapLayer navLayer = (NavigationTiledMapLayer) map.getLayer("navigation");
