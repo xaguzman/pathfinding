@@ -30,6 +30,7 @@ To generate this new layer, you need to load your map via the [NavTmxMapLoader](
 which comes with gdx-bridge.
 
 For the NavTmxMapLoader to work, your tmx map needs to have two things:
+
 1.  You need to have certain tiles in one of your tilesets which has a custom property which specifies whether a tile is walkable or not (by default, this custom property name is "walkable", but you can name it whatever you want).
 The value of this custom property can be whatever you want.
 2.  Make sure to use a layer exclusively for navigation data, this layer should use your tiles which contain the custom property mentioned above.
