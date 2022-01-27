@@ -1,5 +1,6 @@
 package org.xguzm.pathfinding.gdxbridge;
 
+import com.badlogic.gdx.maps.MapLayers;
 import org.xguzm.pathfinding.grid.GridCell;
 
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
@@ -35,18 +36,18 @@ public class NavTmxMapLoader extends TmxMapLoader {
 		this.navigationProperty = navigationProperty;
 		this.navigationClosedValue = navigationClosedValue;
 	}
-		
+
 	@Override
-	protected void loadTileLayer(TiledMap map, Element element) {
+	protected void loadTileLayer(TiledMap map, MapLayers parentLayers, Element element) {
 		String layerName = element.getAttribute("name", null);
 		if ( navigationLayerName.equals(layerName)){
 			loadNavigationLayer(map, element, layerName);
 		}
 		else{
-			super.loadTileLayer(map, element);
+			super.loadTileLayer(map, parentLayers, element);
 		}
 	}
-	
+
 	private void loadNavigationLayer(TiledMap map, Element element, String layerName){
 		int width = element.getIntAttribute("width", 0);
 		int height = element.getIntAttribute("height", 0);
