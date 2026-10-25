@@ -5,13 +5,10 @@ import org.xguzm.pathfinding.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Util {
-
-	private static final List<NavigationNode> path = new ArrayList<NavigationNode>(); 
-	
+public class Util {	
 	@SuppressWarnings("unchecked")
 	public static <T extends NavigationNode> List<T> backtrace(T node){
-		path.clear();
+		List<NavigationNode> path = new ArrayList<NavigationNode>();
 		path.add(node);
 		T node1 = node;
 		while (node1.getParent() != null && node1 != node1.getParent()){
